@@ -6,6 +6,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons';
+import { MdDashboard } from "react-icons/md";
 import { Button, Layout, Menu, theme } from 'antd';
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
@@ -23,8 +24,8 @@ const MainLayout = () => {
           defaultSelectedKeys={['1']}
           items={[
             {
-              key: '1',
-              icon: <UserOutlined />,
+              key: '',
+              icon: <MdDashboard />,
               label: 'nav 1',
             },
             {
