@@ -2,11 +2,6 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-.demo-logo-vertical {
-  background-color: red;
-  width: 100%;
-  height: 64px;
-}
 .trigger {
   padding: 0 24px;
   font-size: 18px;

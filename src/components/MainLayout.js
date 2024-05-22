@@ -8,36 +8,39 @@ import {
 } from '@ant-design/icons';
 import { MdDashboard } from "react-icons/md";
 import { Button, Layout, Menu, theme } from 'antd';
+import { useNavigate } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const navigate = useNavigate();
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
+        <div className="logo" />
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={['']}
+          onClick={({key}) => {
+           
+              navigate(key);
+            
+          }}
           items={[
             {
               key: '',
               icon: <MdDashboard />,
-              label: 'nav 1',
+              label: 'Dashboard',
             },
             {
-              key: '2',
-              icon: <VideoCameraOutlined />,
-              label: 'nav 2',
+              key: 'customers',
+              icon: <MdDashboard />,
+              label: 'Customers',
             },
-            {
-              key: '3',
-              icon: <UploadOutlined />,
-              label: 'nav 3',
-            },
+           
           ]}
         />
       </Sider>
