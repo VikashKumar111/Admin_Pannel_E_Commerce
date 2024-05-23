@@ -50,3 +50,11 @@ body {
   margin: 0;
   height: 64px;
 }
+
+main {
+  overflow-y: scroll;
+}
+
+.ant-menu-title-content {
+  font-size: 16px;
+}
