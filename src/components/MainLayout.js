@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 import {
-  AiOutlineDashboard,
   AiOutlineShoppingCart,
   AiOutlineUser,
   AiOutlineBgColors,
@@ -190,7 +186,7 @@ const MainLayout = () => {
                   width={32}
                   height={32}
                   src="https://stroyka-admin.html.themeforest.scompiler.ru/variants/ltr/images/customers/customer-4-64x64.jpg"
-                     alt="user image" 
+                    
                 />
               </div>
               <div>
