@@ -18,6 +18,7 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { ImBlog } from "react-icons/im";
 import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { RiCouponLine } from "react-icons/ri";
+import { IoIosNotifications } from "react-icons/io";
 import { Button, Layout, Menu, theme } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
@@ -38,6 +39,7 @@ const MainLayout = () => {
           </h2>
         </div>
         <Menu
+          className="py-3"
           theme="dark"
           mode="inline"
           defaultSelectedKeys={[""]}
@@ -161,6 +163,7 @@ const MainLayout = () => {
       </Sider>
       <Layout>
         <Header
+          className="d-flex justify-content-between ps-1 pe-5"
           style={{
             padding: 0,
             background: colorBgContainer,
@@ -176,6 +179,26 @@ const MainLayout = () => {
               height: 64,
             }}
           />
+          <div className="d-flex gap-3 align-items-center">
+            <div className="position-relative">
+              <IoIosNotifications className="fs-4" />
+              <span className="badge bg-warning rounded-circle p-1 position-absolute">3</span>
+            </div>
+            <div className="d-flex gap-3 align-items-center">
+              <div>
+                <img
+                  width={32}
+                  height={32}
+                  src="https://stroyka-admin.html.themeforest.scompiler.ru/variants/ltr/images/customers/customer-4-64x64.jpg"
+                     alt="user image" 
+                />
+              </div>
+              <div>
+                <h5 className="mb-0">Vikash</h5>
+                <p className="mb-0">vikasthakur@gmail.com</p>
+              </div>
+            </div>
+          </div>
         </Header>
         <Content
           style={{
