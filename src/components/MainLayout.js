@@ -20,6 +20,7 @@ import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { RiCouponLine } from "react-icons/ri";
 import { Button, Layout, Menu, theme } from "antd";
 import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -185,7 +186,7 @@ const MainLayout = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
