@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Enquiries from './pages/Enquiries';
 import Bloglist from './pages/Bloglist';
 import Blogcatlist from './pages/Blogcatlist';
+import Orders from './pages/Orders';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='enquiries' element={<Enquiries />} />
           <Route path='blog-list' element={<Bloglist />} />
           <Route path='blog-category-list' element={<Blogcatlist />} />
+          <Route path='orders' element={<Orders />} />
         </Route>  
       </Routes>
     </Router>
