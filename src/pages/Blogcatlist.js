@@ -31,13 +31,16 @@ for (let i = 0; i < 88; i++) {
 }
 
 
-const Bloglist = () => {
-    return <div>
-        <h3 className="mb-4">Blogs List</h3>
-        <div>
-             <Table columns={columns} dataSource={data1} />
-        </div>
-   </div> 
+
+const Blogcatlist = () => {
+  return (
+    <div>
+      <h3 className="mb-4">Blog Categories</h3>
+      <div>
+        <Table columns={columns} dataSource={data1} />
+      </div>
+    </div>
+  );
 };
 
-export default Bloglist;
+export default Blogcatlist;
