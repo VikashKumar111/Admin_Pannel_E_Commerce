@@ -13,17 +13,22 @@ const columns = [
     dataIndex: "age",
   },
   {
+    title: "Phone Number",
+    dataIndex: "number",
+  },
+  {
     title: "Address",
     dataIndex: "address",
   },
 ];
 const data1 = [];
-for (let i = 0; i < 46; i++) {
+for (let i = 0; i < 88; i++) {
   data1.push({
     key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
+    name: `Anuj Kumar ${i}`,
+    age: 28,
+    number: 9318667788,
+    address: `Saharanpur, Park Lane no. ${i}`,
   });
 }
 const Dashboard = () => {
@@ -50,23 +55,23 @@ const Dashboard = () => {
     },
     {
       type: "Jun",
-      sales: 38,
+      sales: 61,
     },
     {
       type: "July",
-      sales: 38,
+      sales: 74,
     },
     {
       type: "Aug",
-      sales: 38,
+      sales: 83,
     },
     {
       type: "Sept",
-      sales: 38,
+      sales: 62,
     },
     {
       type: "Oct",
-      sales: 38,
+      sales: 45,
     },
     {
       type: "Nov",
@@ -74,7 +79,7 @@ const Dashboard = () => {
     },
     {
       type: "Dec",
-      sales: 38,
+      sales: 59,
     },
   ];
   const config = {
@@ -150,7 +155,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="mt-3">
+      <div className="mt-5">
         <h3>Income Statistics</h3>
         <div>
           <Column {...config} />
