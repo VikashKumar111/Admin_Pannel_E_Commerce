@@ -1,8 +1,17 @@
 import React from "react";
+import CustomInput from "../components/Custominput";
 
 const Addbrand = () => {
     return <div>
-        <h3 className="mb-4"></h3>
+        <h3 className="mb-4">Add Brand</h3>
+        <div>
+            <form action="">
+                <CustomInput type="text" label="Add Brand" />
+                <button className="btn btn-success border-0 rounded-3 my-5" type="submit">
+                    Add Brand
+                </button>
+            </form>
+        </div>
     </div>
 };
 
