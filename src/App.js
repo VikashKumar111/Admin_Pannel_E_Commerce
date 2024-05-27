@@ -12,6 +12,7 @@ import Blogcatlist from './pages/Blogcatlist';
 import Orders from './pages/Orders';
 import Customers from './pages/Customers';
 import Colorlist from './pages/Colorlist';
+import Categorylist from './pages/Categorylist';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='orders' element={<Orders />} />
           <Route path='customers' element={<Customers />} />
           <Route path='list-color' element={<Colorlist />} />
+          <Route path='list-category' element={<Categorylist/>} />
         </Route>  
       </Routes>
     </Router>
