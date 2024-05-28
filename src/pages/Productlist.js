@@ -34,7 +34,7 @@ for (let i = 0; i < 88; i++) {
 
 const Productlist = () => {
     return <div>
-        <h3 className="mb-4">Products</h3>
+        <h3 className="mb-4 title">Products</h3>
         <div>
             <Table columns={columns} dataSource={data1} />
         </div>

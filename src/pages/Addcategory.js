@@ -3,7 +3,7 @@ import CustomInput from "../components/Custominput";
 
 const Addcategory = () => {
     return <div>
-        <h3 className="mb-4">Add Category</h3>
+        <h3 className="mb-4 title">Add Category</h3>
         <div>
             <form action="">
                 <CustomInput type="text" label="Add Category" />

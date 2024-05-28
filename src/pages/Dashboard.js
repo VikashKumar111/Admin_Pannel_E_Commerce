@@ -156,13 +156,13 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="mt-5">
-        <h3>Income Statistics</h3>
+        <h3 className="mb-5 title">Income Statistics</h3>
         <div>
           <Column {...config} />
         </div>
       </div>
       <div className="mt-5">
-        <h3 className="mb-4">Recent Orders</h3>
+        <h3 className="mb-5 title">Recent Orders</h3>
         <div>
           <Table
             columns={columns}

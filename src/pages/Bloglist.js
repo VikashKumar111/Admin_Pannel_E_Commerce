@@ -33,7 +33,7 @@ for (let i = 0; i < 88; i++) {
 
 const Bloglist = () => {
     return <div>
-        <h3 className="mb-4">Blogs List</h3>
+        <h3 className="mb-4 title">Blogs List</h3>
         <div>
              <Table columns={columns} dataSource={data1} />
         </div>

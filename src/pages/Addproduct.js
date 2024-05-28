@@ -34,7 +34,7 @@ const Addproduct = () => {
     setDesc(e);
   };
     return <div>
-        <h3 className="mb-4">Add Product</h3>
+        <h3 className="mb-4 title">Add Product</h3>
         <form>
             <CustomInput type="text" label="Enter Product Title" />
             <div className="mb-3"> <ReactQuill
