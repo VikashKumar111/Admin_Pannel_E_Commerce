@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from "@ant-design/icons";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import {
   AiOutlineShoppingCart,
   AiOutlineUser,
@@ -16,11 +13,9 @@ import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { RiCouponLine } from "react-icons/ri";
 import { IoIosNotifications } from "react-icons/io";
 import { Button, Layout, Menu, theme } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
-
-
 
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -181,20 +176,47 @@ const MainLayout = () => {
           <div className="d-flex gap-3 align-items-center">
             <div className="position-relative">
               <IoIosNotifications className="fs-4" />
-              <span className="badge bg-warning rounded-circle p-1 position-absolute">3</span>
+              <span className="badge bg-warning rounded-circle p-1 position-absolute">
+                3
+              </span>
             </div>
-            <div className="d-flex gap-3 align-items-center">
+            <div className="d-flex gap-3 align-items-center dropdown">
               <div>
                 <img
                   width={32}
                   height={32}
                   src="https://stroyka-admin.html.themeforest.scompiler.ru/variants/ltr/images/customers/customer-4-64x64.jpg"
-                    
                 />
               </div>
-              <div>
+              <div
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 <h5 className="mb-0">Vikash</h5>
                 <p className="mb-0">vikasthakur@gmail.com</p>
+              </div>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  <Link
+                    class="dropdown-item  py-1 mb-1"
+                    style={{ height: "auto", lineHeight: "20px" }}
+                    to="/"
+                  >
+                    View Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    class="dropdown-item  py-1 mb-1"
+                    style={{ height: "auto", lineHeight: "20px" }}
+                    to="/"
+                  >
+                    Signout
+                  </Link>
+                </li>
               </div>
             </div>
           </div>
