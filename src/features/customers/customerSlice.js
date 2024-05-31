@@ -13,9 +13,11 @@ export const getUsers = createAsyncThunk(
 );
 
 const initialState = {
-    custmers: [],
-    isError: false,
-    
+  custmers: [],
+  isError: false,
+  isLoading: false,
+  isSuccess: false,
+  message: "",
 };
 
 export const customerSlice = createSlice({
@@ -28,10 +30,16 @@ export const customerSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getUsers.fulfilled, (state, action) => {
-          state.isLoading = false;
-          state.isError = false;
-          state.isSuccess = true;
-          state.customers = action.payload;
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.customers = action.payload;
+      })
+      .addCase(getUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
       });
   },
 });
