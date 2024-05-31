@@ -5,6 +5,7 @@ const getUserfromLocalStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
   : null;
 
+
 export const login = createAsyncThunk(
   "auth/login",
   async (user, thunkAPI) => {

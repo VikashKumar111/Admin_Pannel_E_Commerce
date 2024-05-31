@@ -198,10 +198,10 @@ const MainLayout = () => {
                 <p className="mb-0">vikasthakur@gmail.com</p>
               </div>
 
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
                   <Link
-                    class="dropdown-item  py-1 mb-1"
+                    className="dropdown-item  py-1 mb-1"
                     style={{ height: "auto", lineHeight: "20px" }}
                     to="/"
                   >
@@ -210,7 +210,7 @@ const MainLayout = () => {
                 </li>
                 <li>
                   <Link
-                    class="dropdown-item  py-1 mb-1"
+                    className="dropdown-item  py-1 mb-1"
                     style={{ height: "auto", lineHeight: "20px" }}
                     to="/"
                   >
