@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit"
-import authReducer from "../features/auth/authSlice"
-
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../features/auth/authSlice";
+import customerReducer from "../features/customer/customerSlice";
 
 export const store = configureStore({
-    reducer: { auth: authReducer },
-    devTools: process.env.NODE_ENV !== 'production',
-}); 
+  reducer: { auth: authReducer, customer: customerReducer },
+  devTools: process.env.NODE_ENV !== "production",
+});

@@ -1,16 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import customerService from "./customerSlice";
 
-export const getUsers = createAsyncThunk(
-  "customer/get-customers",
-  async (thunkAPI) => {
-    try {
-      return await customerService.getUsers();
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
+export const getUsers = createAsyncThunk("customer/get-customers", async (thunkAPI) => {
+  try {
+    return await customerService.getUsers();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
   }
-);
+});
 
 const initialState = {
   custmers: [],
@@ -43,3 +40,5 @@ export const customerSlice = createSlice({
       });
   },
 });
+
+export default customerSlice.reducer;
