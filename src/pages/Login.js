@@ -34,7 +34,7 @@ const Login = () => {
     if (!user==null || isSuccess) {
       navigate("admin")
     } else {
-      alert("not")
+      navigate("#")
     }
   },[user, isLoading, isError, isSuccess, message])
   return (
