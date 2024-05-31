@@ -1,15 +1,37 @@
-import axios from "axios";
-import { base_url } from "../../utils/base_url";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import customerService from "./customerSlice";
 
+export const getUsers = createAsyncThunk(
+  "customer/get-customers",
+  async (thunkAPI) => {
+    try {
+      return await customerService.getUsers();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
-const getUsers = async () => {
-    const response = await axios.get(`${base_url}user/all-users`);
-    return response.data;
+const initialState = {
+    custmers: [],
+    isError: false,
+    
 };
 
-
-const customerService = {
-    getUsers,
-};
-
-export default customerService;
+export const customerSlice = createSlice({
+  name: "users",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUsers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUsers.fulfilled, (state, action) => {
+          state.isLoading = false;
+          state.isError = false;
+          state.isSuccess = true;
+          state.customers = action.payload;
+      });
+  },
+});
