@@ -6,7 +6,6 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/auth/authSlice";
 
-
 let schema = Yup.object().shape({
   email: Yup.string()
     .email("Email should be valid")
@@ -29,14 +28,16 @@ const Login = () => {
     },
   });
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
   useEffect(() => {
-    if (!user==null || isSuccess) {
-      navigate("admin")
+    if (!user == null || isSuccess) {
+      navigate("admin");
     } else {
-      navigate("#")
+      navigate("");
     }
-  },[user, isLoading, isError, isSuccess, message])
+  }, [user, isLoading, isError, isSuccess, message]);
   return (
     <div className="py-5" style={{ background: "#ffd333", minHeight: "100vh" }}>
       <br />
@@ -47,6 +48,9 @@ const Login = () => {
       >
         <h3 className="text-center title">Login</h3>
         <p className="text-center">Login to your account to continue</p>
+        <div className="error text-center">
+          {message.message === "Rejected" ? "you are not admin" : ""}
+        </div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
             type="text"
