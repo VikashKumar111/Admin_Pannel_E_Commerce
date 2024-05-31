@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import customerService from "./customerSlice";
+import customerService from "./customerService";
 
 export const getUsers = createAsyncThunk("customer/get-customers", async (thunkAPI) => {
   try {
@@ -10,7 +10,7 @@ export const getUsers = createAsyncThunk("customer/get-customers", async (thunkA
 });
 
 const initialState = {
-  custmers: [],
+  customers: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
