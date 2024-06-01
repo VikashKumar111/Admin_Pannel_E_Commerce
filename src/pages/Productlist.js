@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "antd";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 
 const columns = [
   {
@@ -35,6 +36,10 @@ for (let i = 0; i < 88; i++) {
 
 
 const Productlist = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
     return <div>
         <h3 className="mb-4 title">Products</h3>
         <div>
