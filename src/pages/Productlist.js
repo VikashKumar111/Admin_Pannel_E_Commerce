@@ -1,25 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { getProducts } from "../features/product/productSlice";
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
+    title: "SNo",
+    dataIndex: "key",
   },
   {
-    title: "Age",
-    dataIndex: "age",
+    title: "Title",
+    dataIndex: "title",
   },
   {
-    title: "Phone Number",
-    dataIndex: "number",
+    title: "Brand",
+    dataIndex: "brand",
   },
   {
-    title: "Address",
-    dataIndex: "address",
+    title: "Category",
+    dataIndex: "category",
+  },
+  {
+    title: "Color",
+    dataIndex: "color",
+  },
+   {
+    title: "Price",
+    dataIndex: "price",
+  },
+   {
+    title: "Action",
+    dataIndex: "action",
   },
 ];
 const data1 = [];
@@ -40,6 +53,7 @@ const Productlist = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, []);
+  
     return <div>
         <h3 className="mb-4 title">Products</h3>
         <div>
