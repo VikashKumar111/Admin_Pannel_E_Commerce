@@ -5,7 +5,7 @@ export const getBlogs = createAsyncThunk("blogs/get-blogs", async (thunkAPI) => 
   try {
     return await blogService.getBlogs();
   } catch (error) {
-      return await thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
   }
 });
 
