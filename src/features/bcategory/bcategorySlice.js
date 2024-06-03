@@ -27,6 +27,20 @@ const bcategorySlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase
+        builder.addCase(getCategories.pending, (state) => {
+            state.isLoading = true;
+        }).addCase(getCategories.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            state.isSuccess = false;
+            state.bCategories = action.payload;
+        }).addCase(getCategories.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.isSuccess = false;
+            state.message = action.error;
+        })
     }
-})
+});
+
+export default bcategorySlice.reducer;
