@@ -4,7 +4,7 @@ import { base_url } from "../../utils/base_url";
 
 
 const getProductCategories = async () => {
-    const response = await axios.get(`${base_url}category/`);
+    const response = await axios.get(`${base_url}prodcategory/`);
     return response.data;
 };
 

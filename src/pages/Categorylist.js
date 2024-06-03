@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../features/pcategory/pcategorySlice";
+import { BiEdit } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
+
 
 const columns = [
   {
@@ -7,31 +13,35 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "Age",
-    dataIndex: "age",
-  },
-  {
-    title: "Phone Number",
-    dataIndex: "number",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
+    title: "Action",
+    dataIndex: "action",
   },
 ];
-const data1 = [];
-for (let i = 0; i < 88; i++) {
-  data1.push({
-    key: i,
-    name: `Anuj Kumar ${i}`,
-    age: 28,
-    number: 9318667788,
-    address: `Saharanpur, Park Lane no. ${i}`,
-  });
-}
-
 
 const Categorylist = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
+  const pCatState = useSelector((state) => state.pcategory.pCategories);
+  const data1 = [];
+  for (let i = 0; i < pCatState.length; i++) {
+    data1.push({
+      key: i + 1,
+      name: pCatState[i].title,
+      action: (
+        <>
+          <Link className="fs-3 text-danger" to="/">
+            <BiEdit />
+          </Link>
+          <Link className="ms-3 fs-3 text-danger" to="/">
+            <AiFillDelete />
+          </Link>
+        </>
+      ),
+    });
+  }
+
   return (
     <div>
       <h3 className="mb-4 title">Product Categories</h3>
