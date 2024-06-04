@@ -6,6 +6,7 @@ import brandReducer from "../features/brands/brandSlice";
 import pcategoryReducer from "../features/pcategory/pcategorySlice";
 import blogReducer from "../features/blogs/blogSlice";
 import bCategoryReducer from "../features/bcategory/bcategorySlice";
+import colorReducer from "../features/color/colorSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     brand: brandReducer,
     pcategory: pcategoryReducer,
     blogs: blogReducer,
-    bCategory:bCategoryReducer,
+    bCategory: bCategoryReducer,
+    color:colorReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
 });
