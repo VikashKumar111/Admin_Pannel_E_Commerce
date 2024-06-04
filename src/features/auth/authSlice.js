@@ -17,8 +17,20 @@ export const login = createAsyncThunk(
   }
 );
 
+export const getOrders = createAsyncThunk(
+  "orders/get-orders",
+  async (thunkAPI) => {
+    try {
+      return await authService.getOrders();
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   user: getUserfromLocalStorage,
+  orders:[],
   isError: false,
   isLoading: false,
   isSuccess: false,

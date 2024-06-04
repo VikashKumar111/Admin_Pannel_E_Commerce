@@ -22,6 +22,10 @@ const columns = [
     title: "Mobile",
     dataIndex: "mobile",
   },
+   {
+    title: "Status",
+    dataIndex: "status",
+  },
   {
     title: "Action",
     dataIndex: "action",
