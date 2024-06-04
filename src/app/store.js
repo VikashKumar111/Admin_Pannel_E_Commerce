@@ -7,6 +7,7 @@ import pcategoryReducer from "../features/pcategory/pcategorySlice";
 import blogReducer from "../features/blogs/blogSlice";
 import bCategoryReducer from "../features/bcategory/bcategorySlice";
 import colorReducer from "../features/color/colorSlice";
+import enquiryReducer from "../features/enquiry/enquirySlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
     pcategory: pcategoryReducer,
     blogs: blogReducer,
     bCategory: bCategoryReducer,
-    color:colorReducer,
+    color: colorReducer,
+    enquiry: enquiryReducer,
   },
   devTools: process.env.NODE_ENV !== "production",
 });
