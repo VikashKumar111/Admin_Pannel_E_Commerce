@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getEnquiry } from "../features/enquiry/enquirySlice";
-import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -42,11 +41,15 @@ const Enquiries = () => {
       name: enqState[i].name,
       email: enqState[i].email,
       mobile: enqState[i].mobile,
+      status: (
+        <>
+          <select name="" className="form-control form-select" id="">
+            <option value="">Set Status</option>
+          </select>
+        </>
+      ),
       action: (
         <>
-          <Link className="fs-3 text-danger" to="/">
-            <BiEdit />
-          </Link>
           <Link className="ms-3 fs-3 text-danger" to="/">
             <AiFillDelete />
           </Link>
