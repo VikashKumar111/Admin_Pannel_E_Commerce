@@ -2,23 +2,23 @@ import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/auth/authSlice";
+import { BiEdit } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
+
 
 const columns = [
+  {
+    title: "SN",
+    dataIndex: "key",
+  },
   {
     title: "Name",
     dataIndex: "name",
   },
   {
-    title: "Age",
-    dataIndex: "age",
-  },
-  {
-    title: "Phone Number",
-    dataIndex: "number",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
+    title: "Action",
+    dataIndex: "action",
   },
 ];
 
@@ -32,10 +32,17 @@ const Orders = () => {
   for (let i = 0; i < orderState.length; i++) {
     data1.push({
       key: i+1,
-      name: orderState[i].title,
-      age: 28,
-      number: 9318667788,
-      address: `Saharanpur, Park Lane no. ${i}`,
+      name: orderState[i].orderby.firstname,
+      action: (
+        <>
+          <Link className="fs-3 text-danger" to="/">
+            <BiEdit />
+          </Link>
+          <Link className="ms-3 fs-3 text-danger" to="/">
+            <AiFillDelete />
+          </Link>
+        </>
+      ),
     });
   }
 

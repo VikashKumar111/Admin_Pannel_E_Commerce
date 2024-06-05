@@ -21,10 +21,8 @@ const login = async (userData) => {
 };
 
 const getOrders = async () => {
-  console.log(getTokenfromLocalStorage.token);
   try {
-    const response = await axios.get(`${base_url}user/get-orders`, config);
-    console.log("Get orders response:", response);
+    const response = await axios.get(`${base_url}user/getallorders`, config);
     return response.data;
   } catch (error) {
     console.error(
