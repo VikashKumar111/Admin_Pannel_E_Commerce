@@ -14,7 +14,7 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
 });
 
 export const getOrders = createAsyncThunk(
-  "orders/get-orders",
+  "order/get-orders",
   async (thunkAPI) => {
     try {
       return await authService.getOrders();
@@ -23,6 +23,20 @@ export const getOrders = createAsyncThunk(
     }
   }
 );
+
+// export const getOrders = createAsyncThunk(
+//   "orders/get-orders",
+//   async (_, thunkAPI) => { // The first parameter is unused, hence "_"
+//     try {
+//       return await authService.getOrders();
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(
+//         error.response ? error.response.data : error.message
+//       );
+//     }
+//   }
+// );
+
 
 const initialState = {
   user: getUserfromLocalStorage,
@@ -74,3 +88,8 @@ export const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+
+
+
+
+
