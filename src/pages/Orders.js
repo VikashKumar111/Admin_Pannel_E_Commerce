@@ -20,6 +20,14 @@ const columns = [
     dataIndex: "product",
   },
   {
+    title: "Amount",
+    dataIndex: "amount",
+  },
+  {
+    title: "Date",
+    dataIndex: "date",
+  },
+  {
     title: "Action",
     dataIndex: "action",
   },
@@ -36,9 +44,15 @@ const Orders = () => {
     data1.push({
       key: i + 1,
       name: orderState[i].orderby.firstname,
-      product: orderState[i].products.map((i) => {
-        return i.product.title;
+      product: orderState[i].products.map((i, j) => {
+        return (
+          <ul key={j}>
+            <li>{i.product.title}</li>
+          </ul>
+        );
       }),
+      amount: orderState[i].paymentIntent.amount,
+      date: new Date(orderState[i].createdAt).toDateString(),
       action: (
         <>
           <Link className="fs-3 text-danger" to="/">
