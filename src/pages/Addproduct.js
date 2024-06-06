@@ -18,8 +18,8 @@ const Addproduct = () => {
 
     const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+       title: "",
+       description: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -36,7 +36,7 @@ const Addproduct = () => {
     <div>
       <h3 className="mb-4 title">Add Product</h3>
       <form onSubmit={formik.handleSubmit}>
-        <CustomInput type="text" label="Enter Product Title" />
+        <CustomInput type="text" label="Enter Product Title" name="title" onChng={formik.handleChange("title")} onBlr={formik.handleBlur("title")} />
         <div className="mb-3">
           <ReactQuill
             theme="snow"
