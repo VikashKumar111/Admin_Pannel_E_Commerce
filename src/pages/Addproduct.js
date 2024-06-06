@@ -5,29 +5,24 @@ import "react-quill/dist/quill.snow.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-
-
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
   description: Yup.string().required("Description is Required"),
 });
 
-
 const Addproduct = () => {
   const [desc, setDesc] = useState();
 
-    const formik = useFormik({
+  const formik = useFormik({
     initialValues: {
-       title: "",
-       description: "",
+      title: "",
+      description: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(login(values));
-      // alert(JSON.stringify(values, null, 2));
+      alert(JSON.stringify(values));
     },
   });
-
 
   const handleChange = (e) => {
     setDesc(e);
@@ -35,16 +30,28 @@ const Addproduct = () => {
   return (
     <div>
       <h3 className="mb-4 title">Add Product</h3>
-      <form onSubmit={formik.handleSubmit}>
-        <CustomInput type="text" label="Enter Product Title" name="title" onChng={formik.handleChange("title")} onBlr={formik.handleBlur("title")} />
-        <div className="mb-3">
+      <form onSubmit={formik.handleSubmit} className="d-flex gap-3 flex-column">
+        <CustomInput
+          type="text"
+          label="Enter Product Title"
+          name="title"
+          onChng={formik.handleChange("title")}
+          onBlr={formik.handleBlur("title")}
+          val={formik.values.title}
+        />
+        <div className="error">
+          {formik.touched.title && formik.errors.title}
+        </div>
+        <div className="">
           <ReactQuill
             theme="snow"
-            value={desc}
-            onChange={(evt) => {
-              handleChange(evt);
-            }}
+            name="description"
+            onChange={formik.handleChange("description")}
+            value={formik.values.description}
           />
+        </div>
+        <div className="error">
+          {formik.touched.description && formik.errors.description}
         </div>
 
         <CustomInput type="number" label="Enter Product Price" />
