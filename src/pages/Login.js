@@ -59,7 +59,7 @@ const Login = () => {
             name="email"
             label="Email Address"
             id="email"
-            onCh={formik.handleChange("email")}
+            onChng={formik.handleChange("email")}
             val={formik.values.email}
           />
           <div className="error">
@@ -72,7 +72,7 @@ const Login = () => {
             name="password"
             label="Password"
             id="pass"
-            onCh={formik.handleChange("password")}
+            onChng={formik.handleChange("password")}
             val={formik.values.password}
           />
           <div className="error">

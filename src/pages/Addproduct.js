@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, {  useEffect, useState } from "react";
 import CustomInput from "../components/Custominput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { getBrands } from "../features/brands/brandSlice";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -11,8 +13,17 @@ let schema = Yup.object().shape({
 });
 
 const Addproduct = () => {
-  const [desc, setDesc] = useState();
+  const [brand, setBrand] = useState([]);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getBrands());
+   },[brand])
+
+
+  const brandState = useSelector((state) => state.brand.brands);
+  setBrand(brandState);
+  console.log(brand);
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -24,9 +35,7 @@ const Addproduct = () => {
     },
   });
 
-  const handleChange = (e) => {
-    setDesc(e);
-  };
+  
   return (
     <div>
       <h3 className="mb-4 title">Add Product</h3>
@@ -54,7 +63,18 @@ const Addproduct = () => {
           {formik.touched.description && formik.errors.description}
         </div>
 
-        <CustomInput type="number" label="Enter Product Price" />
+        <CustomInput
+          type="number"
+          label="Enter Product Price"
+          name="price"
+          onChng={formik.handleChange("price")}
+          onBlr={formik.handleBlur("price")}
+          val={formik.values.price}
+        />
+        <div className="error">
+          {formik.touched.price && formik.errors.price}
+        </div>
+
         <select name="" className="form-control py-3 mb-3" id="">
           <option value="">Select Brand</option>
         </select>
