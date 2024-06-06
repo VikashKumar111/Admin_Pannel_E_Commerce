@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomInput from "../components/Custominput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -6,28 +6,34 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../features/brands/brandSlice";
+import { getCategories } from "../features/pcategory/pcategorySlice";
+import Combobox from "react-widgets/Combobox";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
   description: Yup.string().required("Description is Required"),
+  price: Yup.string().required("Price is Required"),
 });
 
 const Addproduct = () => {
-  const [brand, setBrand] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getBrands());
-   },[brand])
+  }, []);
 
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   const brandState = useSelector((state) => state.brand.brands);
-  setBrand(brandState);
-  console.log(brand);
+  const catState = useSelector((state) => state.pcategory.pCategories);
+
   const formik = useFormik({
     initialValues: {
       title: "",
       description: "",
+      price: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -35,7 +41,6 @@ const Addproduct = () => {
     },
   });
 
-  
   return (
     <div>
       <h3 className="mb-4 title">Add Product</h3>
@@ -74,12 +79,25 @@ const Addproduct = () => {
         <div className="error">
           {formik.touched.price && formik.errors.price}
         </div>
-
         <select name="" className="form-control py-3 mb-3" id="">
           <option value="">Select Brand</option>
+          {brandState.map((i, j) => {
+            return (
+              <option key={j} value={i.title}>
+                {i.title}
+              </option>
+            );
+          })}
         </select>
         <select name="" className="form-control py-3 mb-3" id="">
           <option value="">Select Category</option>
+          {catState.map((i, j) => {
+            return (
+              <option key={j} value={i.title}>
+                {i.title}
+              </option>
+            );
+          })}
         </select>
         <select name="" className="form-control py-3 mb-3" id="">
           <option value="">Select Color</option>
