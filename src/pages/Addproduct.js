@@ -18,12 +18,12 @@ let schema = Yup.object().shape({
   brand: Yup.string().required("Brand is Required"),
   category: Yup.string().required("Category is Required"),
   color: Yup.array().required("Colors are required"),
+  quantity: Yup.number().required("Quantity is Required"),
 });
 
 const Addproduct = () => {
   const dispatch = useDispatch();
   const [color, setColor] = useState([]);
-  console.log(color);
 
   useEffect(() => {
     dispatch(getBrands());
@@ -50,8 +50,9 @@ const Addproduct = () => {
       description: "",
       price: "",
       brand: "",
-      category:"",
-      color:"",
+      category: "",
+      color: [],
+      quantity: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -113,7 +114,7 @@ const Addproduct = () => {
             );
           })}
         </select>
-         <div className="error">
+        <div className="error">
           {formik.touched.brand && formik.errors.brand}
         </div>
         <select
@@ -133,7 +134,7 @@ const Addproduct = () => {
             );
           })}
         </select>
-         <div className="error">
+        <div className="error">
           {formik.touched.category && formik.errors.category}
         </div>
         <Multiselect
@@ -141,12 +142,23 @@ const Addproduct = () => {
           dataKey="id"
           textField="color"
           data={colors}
-          onChange={(e) => setColor(e)}
+          value={formik.values.color}
+          onChange={(value) => formik.setFieldValue("color", value)}
         />
-         <div className="error">
+        <div className="error">
           {formik.touched.color && formik.errors.color}
         </div>
-        <CustomInput type="number" label="Enter Quantity" />
+        <CustomInput
+          type="number"
+          label="Enter Quantity"
+          name="quantity"
+          onChng={formik.handleChange("quantity")}
+          onBlr={formik.handleBlur("quantity")}
+          val={formik.values.quantity}
+        />
+        <div className="error">
+          {formik.touched.quantity && formik.errors.quantity}
+        </div>
         <button
           className="btn btn-success border-0 rounded-3 my-5"
           type="submit"
