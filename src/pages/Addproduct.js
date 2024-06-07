@@ -7,7 +7,9 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../features/brands/brandSlice";
 import { getCategories } from "../features/pcategory/pcategorySlice";
-import Combobox from "react-widgets/Combobox";
+import { getColors } from "../features/color/colorSlice";
+import "react-widgets/styles.css";
+import Multiselect from "react-widgets/Multiselect";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -20,14 +22,15 @@ const Addproduct = () => {
 
   useEffect(() => {
     dispatch(getBrands());
+    dispatch(getCategories());
+    dispatch(getColors());
   }, []);
 
-  useEffect(() => {
-    dispatch(getCategories());
-  }, []);
+  
 
   const brandState = useSelector((state) => state.brand.brands);
   const catState = useSelector((state) => state.pcategory.pCategories);
+  const colorState = useSelector((state) => state.pcategory.pCategories);
 
   const formik = useFormik({
     initialValues: {
@@ -67,7 +70,6 @@ const Addproduct = () => {
         <div className="error">
           {formik.touched.description && formik.errors.description}
         </div>
-
         <CustomInput
           type="number"
           label="Enter Product Price"
@@ -99,11 +101,18 @@ const Addproduct = () => {
             );
           })}
         </select>
-        <select name="" className="form-control py-3 mb-3" id="">
-          <option value="">Select Color</option>
-        </select>
+        <Multiselect
+          dataKey="id"
+          textField="color"
+          defaultValue={[1]}
+          data={[
+            { id: 1, color: "Red" },
+            { id: 2, color: "Yellow" },
+            { id: 3, color: "Blue" },
+            { id: 4, color: "Orange" },
+          ]}
+        />
         <CustomInput type="number" label="Enter Quantity" />
-
         <button
           className="btn btn-success border-0 rounded-3 my-5"
           type="submit"
