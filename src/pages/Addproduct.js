@@ -14,7 +14,10 @@ import Multiselect from "react-widgets/Multiselect";
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
   description: Yup.string().required("Description is Required"),
-  price: Yup.string().required("Price is Required"),
+  price: Yup.number().required("Price is Required"),
+  brand: Yup.string().required("Brand is Required"),
+  category: Yup.string().required("Category is Required"),
+  color: Yup.array().required("Colors are required"),
 });
 
 const Addproduct = () => {
@@ -46,6 +49,9 @@ const Addproduct = () => {
       title: "",
       description: "",
       price: "",
+      brand: "",
+      category:"",
+      color:"",
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -90,7 +96,14 @@ const Addproduct = () => {
         <div className="error">
           {formik.touched.price && formik.errors.price}
         </div>
-        <select name="" className="form-control py-3 mb-3" id="">
+        <select
+          name="brand"
+          onChange={formik.handleChange("brand")}
+          onBlur={formik.handleBlur("brand")}
+          value={formik.values.brand}
+          className="form-control py-3 mb-3"
+          id=""
+        >
           <option value="">Select Brand</option>
           {brandState.map((i, j) => {
             return (
@@ -100,7 +113,17 @@ const Addproduct = () => {
             );
           })}
         </select>
-        <select name="" className="form-control py-3 mb-3" id="">
+         <div className="error">
+          {formik.touched.brand && formik.errors.brand}
+        </div>
+        <select
+          name="category"
+          onChange={formik.handleChange("category")}
+          onBlur={formik.handleBlur("category")}
+          value={formik.values.category}
+          className="form-control py-3 mb-3"
+          id=""
+        >
           <option value="">Select Category</option>
           {catState.map((i, j) => {
             return (
@@ -110,12 +133,19 @@ const Addproduct = () => {
             );
           })}
         </select>
+         <div className="error">
+          {formik.touched.category && formik.errors.category}
+        </div>
         <Multiselect
+          name="color"
           dataKey="id"
           textField="color"
           data={colors}
-          onChange={(e)=> setColor(e)}
+          onChange={(e) => setColor(e)}
         />
+         <div className="error">
+          {formik.touched.color && formik.errors.color}
+        </div>
         <CustomInput type="number" label="Enter Quantity" />
         <button
           className="btn btn-success border-0 rounded-3 my-5"
