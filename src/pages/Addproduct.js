@@ -19,18 +19,27 @@ let schema = Yup.object().shape({
 
 const Addproduct = () => {
   const dispatch = useDispatch();
+  const [color, setColor] = useState([]);
+  console.log(color);
 
   useEffect(() => {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(getColors());
+    formik.values.color = color;
   }, []);
-
-  
 
   const brandState = useSelector((state) => state.brand.brands);
   const catState = useSelector((state) => state.pcategory.pCategories);
-  const colorState = useSelector((state) => state.pcategory.pCategories);
+  const colorState = useSelector((state) => state.color.colors);
+
+  const colors = [];
+  colorState.forEach((i) => {
+    colors.push({
+      _id: i._id,
+      color: i.title,
+    });
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -104,13 +113,8 @@ const Addproduct = () => {
         <Multiselect
           dataKey="id"
           textField="color"
-          defaultValue={[1]}
-          data={[
-            { id: 1, color: "Red" },
-            { id: 2, color: "Yellow" },
-            { id: 3, color: "Blue" },
-            { id: 4, color: "Orange" },
-          ]}
+          data={colors}
+          onChange={(e)=> setColor(e)}
         />
         <CustomInput type="number" label="Enter Quantity" />
         <button
