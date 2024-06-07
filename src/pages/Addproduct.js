@@ -10,6 +10,7 @@ import { getCategories } from "../features/pcategory/pcategorySlice";
 import { getColors } from "../features/color/colorSlice";
 import "react-widgets/styles.css";
 import Multiselect from "react-widgets/Multiselect";
+import Dropzone from 'react-dropzone';
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -159,6 +160,20 @@ const Addproduct = () => {
         <div className="error">
           {formik.touched.quantity && formik.errors.quantity}
         </div>
+
+        <div className="bg-white border-1 p-5 text-center">
+          <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
+          {({ getRootProps, getInputProps }) => (
+            <section>
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                <p>Drag 'n' drop some files here, or click to select files</p>
+              </div>
+            </section>
+          )}
+        </Dropzone>
+        </div>
+
         <button
           className="btn btn-success border-0 rounded-3 my-5"
           type="submit"
