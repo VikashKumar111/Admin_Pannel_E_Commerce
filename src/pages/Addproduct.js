@@ -178,7 +178,7 @@ const Addproduct = () => {
           </Dropzone>
         </div>
 
-        <div className="showimages d-flex">
+        <div className="showimages d-flex flex-wrap gap-3">
           {imgState.map((i, j) => {
             return (
               <div key={j} className="position-relative">

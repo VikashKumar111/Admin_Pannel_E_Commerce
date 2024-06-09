@@ -6,10 +6,21 @@ export const uploadImg = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const formData = new FormData();
-      for (let i = 0; i < data.length; i++ ){
+      for (let i = 0; i < data.length; i++) {
         formData.append("images", data[i]);
       }
       return await uploadService.uploadImg(formData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteImg = createAsyncThunk(
+  "delete/images",
+  async (id, thunkAPI) => {
+    try {
+      return await uploadService.deleteImg(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

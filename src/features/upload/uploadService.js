@@ -9,8 +9,16 @@ const uploadImg = async (data) => {
     return response.data;
 };
 
+
+const deleteImg = async (id) => {
+    const response = await axios.post(`${base_url}upload/`, id, config);
+    return response.data;
+};
+
+
 const uploadService = {
     uploadImg,
+    deleteImg,
 };
 
 
