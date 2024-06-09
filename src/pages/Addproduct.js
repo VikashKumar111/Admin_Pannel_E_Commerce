@@ -10,7 +10,8 @@ import { getCategories } from "../features/pcategory/pcategorySlice";
 import { getColors } from "../features/color/colorSlice";
 import "react-widgets/styles.css";
 import Multiselect from "react-widgets/Multiselect";
-import Dropzone from 'react-dropzone';
+import Dropzone from "react-dropzone";
+import { uploadImg } from "../features/upload/uploadSlice";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -36,6 +37,7 @@ const Addproduct = () => {
   const brandState = useSelector((state) => state.brand.brands);
   const catState = useSelector((state) => state.pcategory.pCategories);
   const colorState = useSelector((state) => state.color.colors);
+  const imgState = useSelector((state) => state.upload.images);
 
   const colors = [];
   colorState.forEach((i) => {
@@ -162,16 +164,29 @@ const Addproduct = () => {
         </div>
 
         <div className="bg-white border-1 p-5 text-center">
-          <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
-          {({ getRootProps, getInputProps }) => (
-            <section>
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
+          <Dropzone
+            onDrop={(acceptedFiles) => dispatch(uploadImg(acceptedFiles))}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <section>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <p>Drag 'n' drop some files here, or click to select files</p>
+                </div>
+              </section>
+            )}
+          </Dropzone>
+        </div>
+
+        <div className="showimages d-flex">
+          {imgState.map((i, j) => {
+            return (
+              <div key={j} className="position-relative">
+                <button className="btn-close position-absolute" style={{ top: "10px", right:"10px"}}></button>
+                <img src={i.url} alt="" width={200} height={200}/>
               </div>
-            </section>
-          )}
-        </Dropzone>
+            );
+          })}
         </div>
 
         <button
