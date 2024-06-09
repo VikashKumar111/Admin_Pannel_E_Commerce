@@ -16,7 +16,7 @@ export const uploadImg = createAsyncThunk(
   }
 );
 
-export const deleteImg = createAsyncThunk(
+export const dltImg = createAsyncThunk(
   "delete/images",
   async (id, thunkAPI) => {
     try {
@@ -56,16 +56,16 @@ export const uploadSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
-      .addCase(deleteImg.pending, (state) => {
+      .addCase(dltImg.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteImg.fulfilled, (state, action) => {
+      .addCase(dltImg.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.images = action.payload;
+        state.images = [];
       })
-      .addCase(deleteImg.rejected, (state, action) => {
+      .addCase(dltImg.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

@@ -11,7 +11,8 @@ import { getColors } from "../features/color/colorSlice";
 import "react-widgets/styles.css";
 import Multiselect from "react-widgets/Multiselect";
 import Dropzone from "react-dropzone";
-import { uploadImg } from "../features/upload/uploadSlice";
+import { dltImg, uploadImg } from "../features/upload/uploadSlice";
+import { createProducts } from "../features/product/productSlice";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -26,6 +27,7 @@ let schema = Yup.object().shape({
 const Addproduct = () => {
   const dispatch = useDispatch();
   const [color, setColor] = useState([]);
+  const [image, setImage] = useState([]);
 
   useEffect(() => {
     dispatch(getBrands());
@@ -47,6 +49,19 @@ const Addproduct = () => {
     });
   });
 
+  const img = [];
+  imgState.forEach((i) => {
+    img.push({
+      public_id: i.public_id,
+      url: i.url,
+    });
+  });
+
+  useEffect(() => {
+   
+    formik.values.image = img;
+  }, [img]);
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -56,10 +71,11 @@ const Addproduct = () => {
       category: "",
       color: [],
       quantity: "",
+      images: "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
+      dispatch(createProducts(values));
     },
   });
 
@@ -182,13 +198,17 @@ const Addproduct = () => {
           {imgState.map((i, j) => {
             return (
               <div key={j} className="position-relative">
-                <button className="btn-close position-absolute" style={{ top: "10px", right:"10px"}}></button>
-                <img src={i.url} alt="" width={200} height={200}/>
+                <button
+                  type="button"
+                  onClick={() => dispatch(dltImg(i.public_id))}
+                  className="btn-close position-absolute"
+                  style={{ top: "10px", right: "10px" }}
+                ></button>
+                <img src={i.url} alt="" width={200} height={200} />
               </div>
             );
           })}
         </div>
-
         <button
           className="btn btn-success border-0 rounded-3 my-5"
           type="submit"
