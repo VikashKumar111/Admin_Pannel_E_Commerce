@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../features/brands/brandSlice";
 import { getCategories } from "../features/pcategory/pcategorySlice";
 import { getColors } from "../features/color/colorSlice";
-import {Select} from "antd"
+import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { dltImg, uploadImg } from "../features/upload/uploadSlice";
 import { createProducts } from "../features/product/productSlice";
@@ -32,7 +32,7 @@ const Addproduct = () => {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(getColors());
-    formik.values.color = color;
+    // formik.values.color = color;
   }, []);
 
   const brandState = useSelector((state) => state.brand.brands);
@@ -40,17 +40,21 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
 
+  // console.log(colorState);
+  // const coloropt = [];
+  // colorState.forEach((i) => {
+  //   coloropt.push({
+  //     _id: i._id,
+  //     color: i.title,
+  //   });
+  // });
 
-  
-  console.log(colorState);
-  const coloropt = [];
-  colorState.forEach((i) => {
-    coloropt.push({
-      _id: i._id,
-      color: i.title,
-    });
-  });
-  
+  // console.log(coloropt);
+
+  const coloropt = colorState.map((i) => ({
+    label: i.title,
+    value: i._id,
+  }));
 
   const img = [];
   imgState.forEach((i) => {
@@ -59,10 +63,8 @@ const Addproduct = () => {
       url: i.url,
     });
   });
-  console.log(img);
 
   useEffect(() => {
-   
     formik.values.images = img;
   }, [img]);
 
@@ -83,11 +85,16 @@ const Addproduct = () => {
     },
   });
 
-  const handleColors = (e) => {
-    setColor(e);
-    console.log(color);
+  // const handleColors = (e) => {
+  //   setColor(e);
+  //   console.log(color);
+  // };
+
+  const handleColors = (selectedColors) => {
+    setColor(selectedColors);
+    formik.setFieldValue("color", selectedColors);
   };
-  
+
   return (
     <div>
       <h3 className="mb-4 title">Add Product</h3>
@@ -165,7 +172,18 @@ const Addproduct = () => {
         <div className="error">
           {formik.touched.category && formik.errors.category}
         </div>
-        <Select mode="multiple" allowClear className="w-100" placeholder="Select colors" defaultValue={color} onChange={(i)=>handleColors(i)} options={coloropt}/>
+        <Select
+          mode="multiple"
+          allowClear
+          className="w-100"
+          placeholder="Select colors"
+          defaultValue={color}
+          onChange={(e) => handleColors(e)}
+          options={coloropt.map((color) => ({
+            label: color.color,
+            value: color._id,
+          }))}
+        />
         <div className="error">
           {formik.touched.color && formik.errors.color}
         </div>
@@ -184,7 +202,6 @@ const Addproduct = () => {
         <div className="bg-white border-1 p-5 text-center">
           <Dropzone
             onDrop={(acceptedFiles) => dispatch(uploadImg(acceptedFiles))}
-            
           >
             {({ getRootProps, getInputProps }) => (
               <section>
@@ -224,7 +241,3 @@ const Addproduct = () => {
 };
 
 export default Addproduct;
-
-
-
-
