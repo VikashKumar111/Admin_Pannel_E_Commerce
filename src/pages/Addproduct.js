@@ -12,6 +12,7 @@ import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { dltImg, uploadImg } from "../features/upload/uploadSlice";
 import { createProducts } from "../features/product/productSlice";
+import { useNavigate } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -19,7 +20,11 @@ let schema = Yup.object().shape({
   price: Yup.number().required("Price is Required"),
   brand: Yup.string().required("Brand is Required"),
   category: Yup.string().required("Category is Required"),
-  color: Yup.array().required("Colors are required"),
+  tags: Yup.string().required("Tag is Required"),
+  // color: Yup.array().required("Colors are required"),
+  color: Yup.array()
+    .min(1, "Pick at least one color")
+    .required("Color is Required"),
   quantity: Yup.number().required("Quantity is Required"),
 });
 
@@ -27,6 +32,7 @@ const Addproduct = () => {
   const dispatch = useDispatch();
   const [color, setColor] = useState([]);
   const [image, setImage] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getBrands());
@@ -40,7 +46,7 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
 
-  // console.log(colorState);
+  console.log(colorState);
   // const coloropt = [];
   // colorState.forEach((i) => {
   //   coloropt.push({
@@ -49,12 +55,15 @@ const Addproduct = () => {
   //   });
   // });
 
-  // console.log(coloropt);
-
   const coloropt = colorState.map((i) => ({
+    // _id: i._id,
+    // color: i.title,
+
     label: i.title,
     value: i._id,
   }));
+
+  console.log(coloropt);
 
   const img = [];
   imgState.forEach((i) => {
@@ -65,8 +74,9 @@ const Addproduct = () => {
   });
 
   useEffect(() => {
+    formik.values.color = color ? color : " ";
     formik.values.images = img;
-  }, [img]);
+  }, [color,img]);
 
   const formik = useFormik({
     initialValues: {
@@ -75,6 +85,7 @@ const Addproduct = () => {
       price: "",
       brand: "",
       category: "",
+      tags: "",
       color: [],
       quantity: "",
       images: "",
@@ -82,10 +93,16 @@ const Addproduct = () => {
     validationSchema: schema,
     onSubmit: (values) => {
       dispatch(createProducts(values));
+      formik.resetForm();
+      setColor(null);
+      setTimeout(() => {
+         navigate("/admin/list-product")
+      }, 3000);
     },
   });
 
   // const handleColors = (e) => {
+  //   console.log(color);
   //   setColor(e);
   //   console.log(color);
   // };
@@ -93,6 +110,7 @@ const Addproduct = () => {
   const handleColors = (selectedColors) => {
     setColor(selectedColors);
     formik.setFieldValue("color", selectedColors);
+    console.log(color);
   };
 
   return (
@@ -172,18 +190,36 @@ const Addproduct = () => {
         <div className="error">
           {formik.touched.category && formik.errors.category}
         </div>
+
+         <select
+          name="tags"
+          onChange={formik.handleChange("tags")}
+          onBlur={formik.handleBlur("tags")}
+          value={formik.values.tags}
+          className="form-control py-3 mb-3"
+          id=""
+        >
+          <option value="" disabled>Select Category</option>
+          <option value="featured">Featured</option>
+          <option value="popular">Popular</option>
+          <option value="special">Special</option>
+    
+        </select>
+        <div className="error">
+          {formik.touched.tags && formik.errors.tags}
+        </div>
+
+
         <Select
           mode="multiple"
           allowClear
           className="w-100"
           placeholder="Select colors"
-          defaultValue={color}
+          value={color}
           onChange={(e) => handleColors(e)}
-          options={coloropt.map((color) => ({
-            label: color.color,
-            value: color._id,
-          }))}
+          options={coloropt}
         />
+
         <div className="error">
           {formik.touched.color && formik.errors.color}
         </div>
