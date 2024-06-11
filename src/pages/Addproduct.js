@@ -13,6 +13,7 @@ import Dropzone from "react-dropzone";
 import { dltImg, uploadImg } from "../features/upload/uploadSlice";
 import { createProducts } from "../features/product/productSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -31,7 +32,7 @@ let schema = Yup.object().shape({
 const Addproduct = () => {
   const dispatch = useDispatch();
   const [color, setColor] = useState([]);
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,13 +46,24 @@ const Addproduct = () => {
   const catState = useSelector((state) => state.pcategory.pCategories);
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
+  const newProduct = useSelector((state) => state.product.products);
+
+  const { isSuccess, isLoading, isError, createdProduct } = newProduct;
+
+  useEffect(() => {
+    if (isSuccess && createdProduct) {
+      toast.success("Product Added Successfully!");
+    }
+    if (isError) {
+      toast.error("Something Went Wrong!");
+    }
+  }, [isSuccess, isLoading, isError]);
 
   const imge = imgState.map(({ public_id: id, url }) => ({
     id,
     url,
   }));
 
-  
   console.log(colorState);
   // const coloropt = [];
   // colorState.forEach((i) => {
@@ -82,7 +94,7 @@ const Addproduct = () => {
   useEffect(() => {
     formik.values.color = color ? color : " ";
     formik.values.images = img;
-  }, [color,img]);
+  }, [color, img]);
 
   const formik = useFormik({
     initialValues: {
@@ -103,7 +115,7 @@ const Addproduct = () => {
       setColor(null);
       dispatch(dltImg(imge.id));
       setTimeout(() => {
-         navigate("/admin/list-product")
+        navigate("/admin/list-product");
       }, 3000);
     },
   });
@@ -198,7 +210,7 @@ const Addproduct = () => {
           {formik.touched.category && formik.errors.category}
         </div>
 
-         <select
+        <select
           name="tags"
           onChange={formik.handleChange("tags")}
           onBlur={formik.handleBlur("tags")}
@@ -206,16 +218,14 @@ const Addproduct = () => {
           className="form-control py-3 mb-3"
           id=""
         >
-          <option value="" disabled>Select Tag</option>
+          <option value="" disabled>
+            Select Tag
+          </option>
           <option value="featured">Featured</option>
           <option value="popular">Popular</option>
           <option value="special">Special</option>
-    
         </select>
-        <div className="error">
-          {formik.touched.tags && formik.errors.tags}
-        </div>
-
+        <div className="error">{formik.touched.tags && formik.errors.tags}</div>
 
         <Select
           mode="multiple"

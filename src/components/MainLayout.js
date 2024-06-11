@@ -6,14 +6,14 @@ import {
   AiOutlineBgColors,
 } from "react-icons/ai";
 import { MdDashboard } from "react-icons/md";
-import { SiBrandfolder } from "react-icons/si";
+import { SiBrandfolder, SiTruenas } from "react-icons/si";
 import { BiCategoryAlt } from "react-icons/bi";
 import { ImBlog } from "react-icons/im";
 import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { RiCouponLine } from "react-icons/ri";
 import { IoIosNotifications } from "react-icons/io";
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Button, Layout, Menu, theme } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
@@ -200,7 +200,10 @@ const MainLayout = () => {
                 <p className="mb-0">vikasthakur@gmail.com</p>
               </div>
 
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <div
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton1"
+              >
                 <li>
                   <Link
                     className="dropdown-item  py-1 mb-1"
@@ -232,7 +235,17 @@ const MainLayout = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          <ToastContainer />
+          <ToastContainer
+            position="top-right"
+            autoClose={500}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            theme="light"
+          />
           <Outlet />
         </Content>
       </Layout>
