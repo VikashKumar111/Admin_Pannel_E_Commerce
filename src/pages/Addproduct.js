@@ -31,7 +31,7 @@ let schema = Yup.object().shape({
 const Addproduct = () => {
   const dispatch = useDispatch();
   const [color, setColor] = useState([]);
-  const [image, setImage] = useState([]);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,6 +46,12 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
 
+  const imge = imgState.map(({ public_id: id, url }) => ({
+    id,
+    url,
+  }));
+
+  
   console.log(colorState);
   // const coloropt = [];
   // colorState.forEach((i) => {
@@ -95,6 +101,7 @@ const Addproduct = () => {
       dispatch(createProducts(values));
       formik.resetForm();
       setColor(null);
+      dispatch(dltImg(imge.id));
       setTimeout(() => {
          navigate("/admin/list-product")
       }, 3000);
@@ -199,7 +206,7 @@ const Addproduct = () => {
           className="form-control py-3 mb-3"
           id=""
         >
-          <option value="" disabled>Select Category</option>
+          <option value="" disabled>Select Tag</option>
           <option value="featured">Featured</option>
           <option value="popular">Popular</option>
           <option value="special">Special</option>
