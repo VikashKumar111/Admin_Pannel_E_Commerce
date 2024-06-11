@@ -48,14 +48,18 @@ const Productlist = () => {
   }, []);
 
   const productState = useSelector((state) => state.product.products);
+  console.log(productState);
   const data1 = [];
+  
+
   for (let i = 0; i < productState.length; i++) {
+    const colorString = productState[i].color.join(', ');
     data1.push({
       key: i + 1,
       title: productState[i].title,
       brand: productState[i].brand,
       category: productState[i].category,
-      color: productState[i].color,
+      color: colorString,
       price: `${productState[i].price}`,
       action: (
         <>

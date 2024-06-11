@@ -99,6 +99,7 @@ export const createProducts = createAsyncThunk(
   "product/create-products",
   async (productData, thunkAPI) => {
     try {
+      console.log('Sending request:',productData);
       return await productService.createProduct(productData);
     } catch (error) {
       return thunkAPI.rejectWithValue({
