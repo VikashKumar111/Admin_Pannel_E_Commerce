@@ -46,19 +46,32 @@ const Addproduct = () => {
   const catState = useSelector((state) => state.pcategory.pCategories);
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
-  const newProduct = useSelector((state) => state.product.products);
-
+  const newProduct = useSelector((state) => state.product);
+  console.log(newProduct);
   const { isSuccess, isLoading, isError, createdProduct } = newProduct;
+
+  // useEffect(() => {
+  //   if (isSuccess && createdProduct) {
+  //     toast.success("Product Added Successfully!");
+  //   }
+  //   if (isError) {
+  //     toast.error("Something Went Wrong!");
+  //   }
+  // }, [isSuccess, isLoading, isError]);
 
   useEffect(() => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfully!");
+      setTimeout(() => {
+        navigate("/admin/list-product");
+      }, 3000);
     }
     if (isError) {
       toast.error("Something Went Wrong!");
     }
-  }, [isSuccess, isLoading, isError]);
+  }, [isSuccess, isError, navigate]);
 
+  
   const imge = imgState.map(({ public_id: id, url }) => ({
     id,
     url,
@@ -114,9 +127,9 @@ const Addproduct = () => {
       formik.resetForm();
       setColor(null);
       dispatch(dltImg(imge.id));
-      setTimeout(() => {
-        navigate("/admin/list-product");
-      }, 3000);
+      // setTimeout(() => {
+      //   navigate("/admin/list-product");
+      // }, 3000);
     },
   });
 
