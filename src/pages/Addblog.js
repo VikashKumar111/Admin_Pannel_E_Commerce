@@ -2,14 +2,37 @@ import { React, useState } from "react";
 import CustomInput from "../components/Custominput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Dropzone from "react-dropzone";
+import { useDispatch, useSelector } from "react-redux";
+import createBlogs from "../features/blogs/blogSlice";
+import { uploadImg } from "../features/upload/uploadSlice";
 
-import { InboxOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+let schema = Yup.object().shape({
+  title: Yup.string().required("Title is Required"),
+  description: Yup.string().required("Description is Required"),
+  category: Yup.string().required("Category is Required"),
+});
 
 const Addblog = () => {
   const [desc, setDesc] = useState();
-
+  const dispatch = useDispatch();
   const bCatState = useSelector((state) => state.bCategory.bCategories);
+
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      description: "",
+      category: "",
+      images: "",
+    },
+    validationSchema: schema,
+    onSubmit: (values) => {
+      dispatch(createBlogs(values));
+      formik.resetForm();
+    },
+  });
 
   const handleChange = (e) => {
     setDesc(e);
@@ -43,7 +66,11 @@ const Addblog = () => {
           >
             <option value="">Select Blog Category</option>
             {bCatState.map((i, j) => {
-              return <option key={j} value={i.title}>{i.title}</option>;
+              return (
+                <option key={j} value={i.title}>
+                  {i.title}
+                </option>
+              );
             })}
           </select>
           <div className="error">
@@ -52,11 +79,31 @@ const Addblog = () => {
 
           <ReactQuill
             theme="snow"
-            value={desc}
-            onChange={(evt) => {
-              handleChange(evt);
-            }}
+            className="mt-3"
+            name="description"
+            onChange={formik.handleChange("description")}
+            value={formik.values.description}
           />
+           <div className="error">
+            {formik.touched.description && formik.errors.description}
+          </div>
+
+          <div className="bg-white border-1 p-5 text-center mt-3">
+            <Dropzone
+              onDrop={(acceptedFiles) => dispatch(uploadImg(acceptedFiles))}
+            >
+              {({ getRootProps, getInputProps }) => (
+                <section>
+                  <div {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <p>
+                      Drag 'n' drop some files here, or click to select files
+                    </p>
+                  </div>
+                </section>
+              )}
+            </Dropzone>
+          </div>
           <button
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
