@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBlogs } from "../features/blogs/blogSlice";
 import { dltImg, uploadImg } from "../features/upload/uploadSlice";
 import { getbCategories } from "../features/bcategory/bcategorySlice";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 let schema = Yup.object().shape({
@@ -20,6 +20,7 @@ let schema = Yup.object().shape({
 
 const Addblog = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getbCategories());
@@ -28,6 +29,8 @@ const Addblog = () => {
   const bCatState = useSelector((state) => state.bCategory.bCategories);
   const imgState = useSelector((state) => state.upload.images);
   const newBlog = useSelector((state) => state.blogs);
+  console.log(newBlog);
+
   const { isSuccess, isLoading, isError, createdBlog } = newBlog;
 
 
@@ -70,7 +73,7 @@ const Addblog = () => {
     if (isSuccess && createdBlog) {
       toast.success("Blog Added Successfully!");
       setTimeout(() => {
-        Navigate("/admin/blog-list");
+        navigate("/admin/blog-list");
       }, 3000);
     }
     if (isError) {
