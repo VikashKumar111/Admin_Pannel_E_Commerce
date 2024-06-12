@@ -43,7 +43,7 @@ const bcategorySlice = createSlice({
       .addCase(getbCategories.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
-        state.isSuccess = false;
+        state.isSuccess = true;
         state.bCategories = action.payload;
       })
       .addCase(getbCategories.rejected, (state, action) => {
@@ -58,7 +58,7 @@ const bcategorySlice = createSlice({
       .addCase(newBlogCategory.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
-        state.isSuccess = false;
+        state.isSuccess = true;
         state.createdBlogCategory = action.payload;
       })
       .addCase(newBlogCategory.rejected, (state, action) => {
