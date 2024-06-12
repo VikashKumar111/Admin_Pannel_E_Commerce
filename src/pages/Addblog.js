@@ -1,4 +1,4 @@
-import { React, useEffect} from "react";
+import { React, useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -6,9 +6,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Dropzone from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
-import createBlogs from "../features/blogs/blogSlice";
-import { uploadImg } from "../features/upload/uploadSlice";
-import { getCategories } from "../features/pcategory/pcategorySlice";
+import { createBlogs } from "../features/blogs/blogSlice";
+import { dltImg, uploadImg } from "../features/upload/uploadSlice";
+import { getbCategories } from "../features/bcategory/bcategorySlice";
+import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -17,16 +19,35 @@ let schema = Yup.object().shape({
 });
 
 const Addblog = () => {
-     const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getbCategories());
+  }, []);
 
-   useEffect(() => {
-    dispatch(getCategories());
-   }, []); 
-  
-  
   const bCatState = useSelector((state) => state.bCategory.bCategories);
   const imgState = useSelector((state) => state.upload.images);
+  const newBlog = useSelector((state) => state.blogs);
+  const { isSuccess, isLoading, isError, createdBlog } = newBlog;
+
+
+  const imge = imgState.map(({ public_id: id, url }) => ({
+    id,
+    url,
+  }));
+
+  const img = [];
+  imgState.forEach((i) => {
+    img.push({
+      public_id: i.public_id,
+      url: i.url,
+    });
+  });
+
+  useEffect(() => {
+    formik.values.images = img;
+  }, [img]);
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -36,17 +57,32 @@ const Addblog = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
+      // console.log("Submitting form with values:", values);
       dispatch(createBlogs(values));
       formik.resetForm();
+      dispatch(dltImg(imge.id));
+      notification();
     },
   });
 
   
+  const notification = () => {
+    if (isSuccess && createdBlog) {
+      toast.success("Blog Added Successfully!");
+      setTimeout(() => {
+        Navigate("/admin/blog-list");
+      }, 3000);
+    }
+    if (isError) {
+      toast.error("Something Went Wrong!");
+    }
+  };
+
   return (
     <div>
       <h3 className="mb-4 title">Add Blog</h3>
       <div className="">
-        <form action="" onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="mt-4">
             <CustomInput
               type="text"
@@ -89,7 +125,7 @@ const Addblog = () => {
             onChange={formik.handleChange("description")}
             value={formik.values.description}
           />
-           <div className="error">
+          <div className="error">
             {formik.touched.description && formik.errors.description}
           </div>
 
@@ -114,10 +150,15 @@ const Addblog = () => {
             {imgState?.map((i, j) => {
               return (
                 <div className="position-relative" key={j}>
-                  <button type="button" className="btn-close position-absolute" style={{ top: "10px", right: "10px" }}></button>
-                  <img src={i.url} alt="" width={200} height={200}/>
+                  <button
+                    onClick={() => dispatch(dltImg(i.public_id))}
+                    type="button"
+                    className="btn-close position-absolute"
+                    style={{ top: "10px", right: "10px" }}
+                  ></button>
+                  <img src={i.url} alt="" width={200} height={200} />
                 </div>
-              )
+              );
             })}
           </div>
           <button
