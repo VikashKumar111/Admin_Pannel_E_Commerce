@@ -59,19 +59,21 @@ const Addproduct = () => {
   //   }
   // }, [isSuccess, isLoading, isError]);
 
-  useEffect(() => {
-    if (isSuccess && createdProduct) {
-      toast.success("Product Added Successfully!");
-      setTimeout(() => {
-        navigate("/admin/list-product");
-      }, 3000);
-    }
-    if (isError) {
-      toast.error("Something Went Wrong!");
-    }
-  }, [isSuccess, isError, navigate]);
-
   
+  // useEffect(() => {
+  //   if (isSuccess && createdProduct) {
+  //     toast.success("Product Added Successfully!");
+  //     setTimeout(() => {
+  //       navigate("/admin/list-product");
+  //     }, 3000);
+  //   }
+  //   if (isError) {
+  //     toast.error("Something Went Wrong!");
+  //   }
+  // }, [isSuccess, isError, navigate]); 
+
+
+
   const imge = imgState.map(({ public_id: id, url }) => ({
     id,
     url,
@@ -127,11 +129,14 @@ const Addproduct = () => {
       formik.resetForm();
       setColor(null);
       dispatch(dltImg(imge.id));
+      notification();
       // setTimeout(() => {
       //   navigate("/admin/list-product");
       // }, 3000);
     },
   });
+  
+  
 
   // const handleColors = (e) => {
   //   console.log(color);
@@ -143,6 +148,18 @@ const Addproduct = () => {
     setColor(selectedColors);
     formik.setFieldValue("color", selectedColors);
     console.log(color);
+  };
+
+  const notification = () => {
+    if (isSuccess && createdProduct) {
+      toast.success("Product Added Successfully!");
+      setTimeout(() => {
+        navigate("/admin/list-product");
+      }, 3000);
+    }
+    if (isError) {
+      toast.error("Something Went Wrong!");
+    }
   };
 
   return (
