@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect} from "react";
 import CustomInput from "../components/Custominput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -8,6 +8,7 @@ import Dropzone from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
 import createBlogs from "../features/blogs/blogSlice";
 import { uploadImg } from "../features/upload/uploadSlice";
+import { getCategories } from "../features/pcategory/pcategorySlice";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -16,10 +17,16 @@ let schema = Yup.object().shape({
 });
 
 const Addblog = () => {
-  const [desc, setDesc] = useState();
-  const dispatch = useDispatch();
-  const bCatState = useSelector((state) => state.bCategory.bCategories);
+     const dispatch = useDispatch();
 
+
+   useEffect(() => {
+    dispatch(getCategories());
+   }, []); 
+  
+  
+  const bCatState = useSelector((state) => state.bCategory.bCategories);
+  const imgState = useSelector((state) => state.upload.images);
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -34,9 +41,7 @@ const Addblog = () => {
     },
   });
 
-  const handleChange = (e) => {
-    setDesc(e);
-  };
+  
   return (
     <div>
       <h3 className="mb-4 title">Add Blog</h3>
@@ -103,6 +108,17 @@ const Addblog = () => {
                 </section>
               )}
             </Dropzone>
+          </div>
+
+          <div className="showimages d-flex flex-wrap mt-3 gap-3">
+            {imgState?.map((i, j) => {
+              return (
+                <div className="position-relative" key={j}>
+                  <button type="button" className="btn-close position-absolute" style={{ top: "10px", right: "10px" }}></button>
+                  <img src={i.url} alt="" width={200} height={200}/>
+                </div>
+              )
+            })}
           </div>
           <button
             className="btn btn-success border-0 rounded-3 my-5"
