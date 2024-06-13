@@ -51,6 +51,21 @@ export const colorSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
+      })
+      .addCase(createColor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createColor.fulfilled, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = true;
+        state.createdColor = action.payload;
+      })
+      .addCase(createColor.rejected, (state, action) => {
+        state.isLoading = true;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
       });
   },
 });
