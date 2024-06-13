@@ -12,36 +12,62 @@ export const getBrands = createAsyncThunk(
   }
 );
 
+export const createBrand = createAsyncThunk(
+  "brands/create-brands",
+  async (brand, thunkAPI) => {
+    try {
+      return await brandService.createBrands(brand);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 const initialState = {
-    brands: [],
-    isError: false,
-    isLoading: false,
-    isSuccess: false,
-    message:"",
-}
-
+  brands: [],
+  isError: false,
+  isLoading: false,
+  isSuccess: false,
+  message: "",
+};
 
 export const brandSlice = createSlice({
-    name: "brands",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(getBrands.pending, (state) => {
-            state.isLoading = true;
-        }).addCase(getBrands.fulfilled, (state,action) => {
-            state.isLoading = false;
-            state.isError = false;
-            state.isSuccess = true;
-            state.brands = action.payload;
-        }).addCase(getBrands.rejected, (state,action) => {
-            state.isLoading = false;
-            state.isError = true;
-            state.isSuccess = false;
-            state.message= action.error;
-        })
-    }
-})
-
+  name: "brands",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getBrands.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getBrands.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.brands = action.payload;
+      })
+      .addCase(getBrands.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(createBrand.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createBrand.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.createdBrand = action.payload;
+      })
+      .addCase(createBrand.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      });
+  },
+});
 
 export default brandSlice.reducer;

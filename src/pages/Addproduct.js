@@ -47,7 +47,7 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
   const newProduct = useSelector((state) => state.product);
-  console.log(newProduct);
+  // console.log(newProduct);
   const { isSuccess, isLoading, isError, createdProduct } = newProduct;
 
   // useEffect(() => {
@@ -79,7 +79,7 @@ const Addproduct = () => {
     url,
   }));
 
-  console.log(colorState);
+  // console.log(colorState);
   // const coloropt = [];
   // colorState.forEach((i) => {
   //   coloropt.push({
@@ -96,7 +96,7 @@ const Addproduct = () => {
     value: i._id,
   }));
 
-  console.log(coloropt);
+  // console.log(coloropt);
 
   const img = [];
   imgState.forEach((i) => {

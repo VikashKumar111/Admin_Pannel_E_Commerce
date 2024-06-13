@@ -48,7 +48,7 @@ const Productlist = () => {
   }, []);
 
   const productState = useSelector((state) => state.product.products);
-  console.log(productState);
+  // console.log(productState);
   const data1 = [];
   
 
