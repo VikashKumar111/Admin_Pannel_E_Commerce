@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 let schema = Yup.object().shape({
-  title: Yup.string().required("Title is Required"),
+  title: Yup.string().required("Category is Required"),
 });
 
 const Addblogcat = () => {
