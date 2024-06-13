@@ -37,7 +37,7 @@ const Addblogcat = () => {
 
     const notification = () => {
       if (isSuccess && createdBlogCategory) {
-        toast.success("Blog Added Successfully!");
+        toast.success("Blog Category Added Successfully!");
         setTimeout(() => {
           navigate("/admin/blog-category-list");
         }, 3000);

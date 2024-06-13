@@ -33,7 +33,7 @@ const Addbrand = () => {
 
   const notification = () => {
     if (isSuccess ) {
-      toast.success("Blog Added Successfully!");
+      toast.success("Brand Added Successfully!");
       setTimeout(() => {
         navigate("/admin/list-brand");
       }, 3000);

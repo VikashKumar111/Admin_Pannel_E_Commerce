@@ -17,7 +17,7 @@ const Addcategory = () => {
   const navigate = useNavigate();
 
   const newProdCat = useSelector((state) => state.pcategory);
-  const { isSuccess, isError, isLoading, createdProdCategory } = newProdCat;
+  const { isSuccess, isError, isLoading, createdCategory } = newProdCat;
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +25,7 @@ const Addcategory = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      // console.log("Submitting form with values:", values);
+      console.log("Submitting form with values:", values);
       dispatch(newProdCategory(values));
       formik.resetForm();
       notification();
@@ -33,8 +33,8 @@ const Addcategory = () => {
   });
 
   const notification = () => {
-    if (isSuccess && createdProdCategory) {
-      toast.success("Blog Added Successfully!");
+    if (isSuccess && createdCategory) {
+      toast.success("Category Added Successfully!");
       setTimeout(() => {
         navigate("/admin/list-category");
       }, 3000);
@@ -48,7 +48,7 @@ const Addcategory = () => {
     <div>
       <h3 className="mb-4 title">Add Category</h3>
       <div>
-        <form action="">
+        <form action=""  onSubmit={formik.handleSubmit}>
           <CustomInput
             type="text"
             name="title"
