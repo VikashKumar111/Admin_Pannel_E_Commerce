@@ -32,7 +32,7 @@ const Addbrand = () => {
   });
 
   const notification = () => {
-    if (isSuccess ) {
+    if (isSuccess && createdBrand) {
       toast.success("Brand Added Successfully!");
       setTimeout(() => {
         navigate("/admin/list-brand");

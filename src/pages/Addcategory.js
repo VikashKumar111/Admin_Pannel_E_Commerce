@@ -25,7 +25,7 @@ const Addcategory = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      console.log("Submitting form with values:", values);
+    //   console.log("Submitting form with values:", values);
       dispatch(newProdCategory(values));
       formik.resetForm();
       notification();
