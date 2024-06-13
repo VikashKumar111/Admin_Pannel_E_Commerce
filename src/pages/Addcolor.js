@@ -7,6 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createColor } from "../features/color/colorSlice";
 
+
+let schema = Yup.object().shape({
+  title: Yup.string().required("Color is Required"),
+});
+
+
 const Addcolor = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
