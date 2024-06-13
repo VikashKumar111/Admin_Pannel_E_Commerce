@@ -64,6 +64,7 @@ const Addblog = () => {
       dispatch(createBlogs(values));
       formik.resetForm();
       dispatch(dltImg(imge.id));
+      dispatch(getbCategories());
       notification();
     },
   });
