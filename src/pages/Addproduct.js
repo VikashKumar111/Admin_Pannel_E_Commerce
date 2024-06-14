@@ -11,8 +11,8 @@ import { getColors } from "../features/color/colorSlice";
 import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { dltImg, uploadImg } from "../features/upload/uploadSlice";
-import { createProducts } from "../features/product/productSlice";
-import { useNavigate } from "react-router-dom";
+import { createProducts, resetState } from "../features/product/productSlice";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 let schema = Yup.object().shape({
@@ -33,7 +33,7 @@ const Addproduct = () => {
   const dispatch = useDispatch();
   const [color, setColor] = useState([]);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getBrands());
@@ -154,7 +154,8 @@ const Addproduct = () => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfully!");
       setTimeout(() => {
-        navigate("/admin/list-product");
+          dispatch(resetState());
+        // navigate("/admin/list-product");
       }, 3000);
     }
     if (isError) {

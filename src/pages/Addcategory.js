@@ -3,7 +3,7 @@ import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { newProdCategory, resetState } from "../features/pcategory/pcategorySlice";
 import { toast } from "react-toastify";
 
@@ -14,7 +14,7 @@ let schema = Yup.object().shape({
 
 const Addcategory = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const newProdCat = useSelector((state) => state.pcategory);
   const { isSuccess, isError, isLoading, createdCategory } = newProdCat;

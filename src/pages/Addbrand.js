@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import {createBrand, resetState} from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 let schema = Yup.object().shape({
@@ -13,7 +13,7 @@ let schema = Yup.object().shape({
 
 const Addbrand = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const newBrand = useSelector((state) => state.brand);
   const { isSuccess, isError, isLoading, createdBrand } = newBrand;
