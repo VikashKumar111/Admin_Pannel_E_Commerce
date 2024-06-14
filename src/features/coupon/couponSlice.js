@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import couponService from "./couponservice";
 
 export const getAllCoupon = createAsyncThunk(
@@ -26,31 +26,52 @@ export const createCoupon = createAsyncThunk(
 export const resetState = createAction("Reset_all");
 
 const initialState = {
-    coupons: [],
-    isError: false,
-    isSuccess: false,
-    isLoading: false,
-    message: "",
+  coupons: [],
+  isError: false,
+  isSuccess: false,
+  isLoading: false,
+  message: "",
 };
 
-
 export const couponSlice = createSlice({
-    name: "coupons",
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder.addCase(getAllCoupon.pending, (state) => {
-            state.isLoading = true;
-        }).addCase(getAllCoupon.fulfilled, (state,action) => {
-            state.isLoading = false;
-            state.isError = false;
-            state.isSuccess = true;
-            state.coupons = action.payload;
-        }).addCase(getAllCoupon.rejected, (state, action) => {
-            state.isLoading = false;
-            state.isError = true;
-            state.isSuccess = false;
-            state.message = action.error;
-        })
-    }
-})
+  name: "coupons",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllCoupon.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllCoupon.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.coupons = action.payload;
+      })
+      .addCase(getAllCoupon.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(createCoupon.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createCoupon.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.createdCoupon = action.payload;
+      })
+      .addCase(createCoupon.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(resetState, () => initialState);
+  },
+});
+
+
+export default couponSlice.reducer;
