@@ -20,6 +20,8 @@ import Addcolor from "./pages/Addcolor";
 import Addcategory from "./pages/Addcategory";
 import Addbrand from "./pages/Addbrand";
 import Addproduct from "./pages/Addproduct";
+import AddCoupon from "./pages/AddCoupon";
+import Couponlist from "./pages/Couponlist";
 
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
           <Route path="brand" element={<Addbrand />} />
           <Route path="list-product" element={<Productlist />} />
           <Route path="product" element={<Addproduct />} />
+          <Route path="list-coupon" element={<Couponlist />} />
+          <Route path="coupon" element={<AddCoupon />} />
         </Route>
       </Routes>
     </Router>

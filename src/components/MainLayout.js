@@ -116,7 +116,7 @@ const MainLayout = () => {
                   label: "Add Coupon",
                 },
                 {
-                  key: "coupon-list",
+                  key: "list-coupon",
                   icon: <RiCouponLine className="fs-4" />,
                   label: "Coupon List",
                 },

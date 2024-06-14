@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import couponService from "./couponservice";
+import couponService from "./couponService";
 
 export const getAllCoupon = createAsyncThunk(
   "coupons/get-coupons",

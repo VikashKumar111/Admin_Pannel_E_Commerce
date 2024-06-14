@@ -3,6 +3,11 @@ import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { createCoupon, resetState } from "../features/coupon/couponSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+
+
 
 let schema = Yup.object().shape({
   name: Yup.string().required("Coupon Name is Required"),
@@ -13,12 +18,12 @@ let schema = Yup.object().shape({
 const AddCoupon = () => {
   const dispatch = useDispatch();
 
-  const newBrand = useSelector((state) => state.brand);
-  const { isSuccess, isError, isLoading, createdBrand } = newBrand;
+  const newCoupon = useSelector((state) => state.coupon);
+  const { isSuccess, isError, isLoading, createdCoupon } = newCoupon;
 
   const formik = useFormik({
     initialValues: {
-      title: "",
+      name: "",
       expiry: "",
       discount: "",
     },
