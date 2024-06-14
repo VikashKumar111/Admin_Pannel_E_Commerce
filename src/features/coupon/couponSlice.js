@@ -73,5 +73,4 @@ export const couponSlice = createSlice({
   },
 });
 
-
 export default couponSlice.reducer;

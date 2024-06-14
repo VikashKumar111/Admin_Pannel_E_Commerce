@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { createCoupon, resetState } from "../features/coupon/couponSlice";
+import { createCoupon, getAllCoupon, resetState } from "../features/coupon/couponSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-
-
-
 
 let schema = Yup.object().shape({
   name: Yup.string().required("Coupon Name is Required"),
@@ -17,6 +14,10 @@ let schema = Yup.object().shape({
 
 const AddCoupon = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllCoupon());
+  }, []);
 
   const newCoupon = useSelector((state) => state.coupon);
   const { isSuccess, isError, isLoading, createdCoupon } = newCoupon;
@@ -36,12 +37,12 @@ const AddCoupon = () => {
   });
 
   const notification = () => {
-    if (isSuccess && createdCoupon) {
+    if (isSuccess) {
       toast.success("Coupon Added Successfully!");
-      setTimeout(() => {
-        dispatch(resetState());
-        // navigate("/admin/list-brand");
-      }, 3000);
+      //   setTimeout(() => {
+      //     dispatch(resetState());
+      //     // navigate("/admin/list-brand");
+      //   }, 3000);
     }
     if (isError) {
       toast.error("Something Went Wrong!");
