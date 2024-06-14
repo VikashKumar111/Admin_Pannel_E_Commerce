@@ -2,9 +2,9 @@ import React from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { newBlogCategory } from "../features/bcategory/bcategorySlice";
+import { newBlogCategory, resetState } from "../features/bcategory/bcategorySlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 let schema = Yup.object().shape({
@@ -13,7 +13,7 @@ let schema = Yup.object().shape({
 
 const Addblogcat = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const newBlogCat = useSelector((state) => state.bCategory);
   const { isSuccess, isError, isLoading, createdBlogCategory } = newBlogCat;
@@ -39,7 +39,8 @@ const Addblogcat = () => {
       if (isSuccess && createdBlogCategory) {
         toast.success("Blog Category Added Successfully!");
         setTimeout(() => {
-          navigate("/admin/blog-category-list");
+          // navigate("/admin/blog-category-list");
+           dispatch(resetState());
         }, 3000);
       }
       if (isError) {

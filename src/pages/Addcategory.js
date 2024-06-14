@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { newProdCategory } from "../features/pcategory/pcategorySlice";
+import { newProdCategory, resetState } from "../features/pcategory/pcategorySlice";
 import { toast } from "react-toastify";
 
 
@@ -36,7 +36,8 @@ const Addcategory = () => {
     if (isSuccess && createdCategory) {
       toast.success("Category Added Successfully!");
       setTimeout(() => {
-        navigate("/admin/list-category");
+         dispatch(resetState());
+        // navigate("/admin/list-category");
       }, 3000);
     }
     if (isError) {

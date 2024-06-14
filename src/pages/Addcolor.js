@@ -3,9 +3,9 @@ import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createColor } from "../features/color/colorSlice";
+import { createColor, resetState } from "../features/color/colorSlice";
 
 
 let schema = Yup.object().shape({
@@ -15,7 +15,7 @@ let schema = Yup.object().shape({
 
 const Addcolor = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const newColor = useSelector((state) => state.color);
   const { isSuccess, isError, isLoading, createdColor } = newColor;
@@ -37,7 +37,8 @@ const Addcolor = () => {
     if (isSuccess && createdColor) {
       toast.success("Color Added Successfully!");
       setTimeout(() => {
-        navigate("/admin/list-color");
+        dispatch(resetState());
+        // navigate("/admin/list-color");
       }, 3000);
     }
     if (isError) {

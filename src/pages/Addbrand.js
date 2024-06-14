@@ -2,7 +2,7 @@ import React from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import {createBrand} from "../features/brands/brandSlice";
+import {createBrand, resetState} from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -35,7 +35,8 @@ const Addbrand = () => {
     if (isSuccess && createdBrand) {
       toast.success("Brand Added Successfully!");
       setTimeout(() => {
-        navigate("/admin/list-brand");
+         dispatch(resetState());
+        // navigate("/admin/list-brand");
       }, 3000);
     }
     if (isError) {
