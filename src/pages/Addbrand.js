@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import {createBrand, resetState} from "../features/brands/brandSlice";
+import {createBrand, getABrand, resetState} from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,12 +16,20 @@ const Addbrand = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const getBrandId = location.pathname.split("/")[3];
-  console.log(getBrandId);
+  
 
   // const navigate = useNavigate();
-
   const newBrand = useSelector((state) => state.brand);
-  const { isSuccess, isError, isLoading, createdBrand } = newBrand;
+  const { isSuccess, isError, isLoading, createdBrand, brandName } = newBrand;
+  
+  useEffect(() => {
+    if (getBrandId !== undefined) {
+      dispatch(getABrand(getBrandId));
+      formik.values.title = brandName;
+    } else {
+      dispatch(resetState());
+    }
+  },[getBrandId])
 
   const formik = useFormik({
     initialValues: {
