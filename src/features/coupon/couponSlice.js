@@ -88,7 +88,7 @@ export const getAllCoupons = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await couponService.getCoupons();
-      console.log(response);
+      // console.log(response);
       return response;
       
     } catch (error) {

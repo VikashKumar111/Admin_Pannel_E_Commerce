@@ -21,7 +21,7 @@ const AddCoupon = () => {
 
   const newCoupon = useSelector((state) => state.coupon);
   const { isSuccess, isError, isLoading, createdCoupon } = newCoupon;
-  console.log(newCoupon);
+  // console.log(newCoupon);
 
 
   const formik = useFormik({

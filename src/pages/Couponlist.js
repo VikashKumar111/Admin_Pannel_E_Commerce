@@ -36,7 +36,7 @@ const Couponlist = () => {
   }, []);
     
   const couponState = useSelector((state) => state.coupon);
-    console.log(couponState);
+    // console.log(couponState);
   
   
   const data1 = [];

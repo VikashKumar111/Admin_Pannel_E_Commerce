@@ -147,7 +147,7 @@ const Addproduct = () => {
   const handleColors = (selectedColors) => {
     setColor(selectedColors);
     formik.setFieldValue("color", selectedColors);
-    console.log(color);
+    // console.log(color);
   };
 
   const notification = () => {

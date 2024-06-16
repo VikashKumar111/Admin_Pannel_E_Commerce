@@ -29,7 +29,7 @@ const Addblog = () => {
   const bCatState = useSelector((state) => state.bCategory.bCategories);
   const imgState = useSelector((state) => state.upload.images);
   const newBlog = useSelector((state) => state.blogs);
-  console.log(newBlog);
+  // console.log(newBlog);
 
   const { isSuccess, isLoading, isError, createdBlog } = newBlog;
 
