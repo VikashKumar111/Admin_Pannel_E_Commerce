@@ -5,14 +5,12 @@ import { config } from "../../utils/axiosconfig";
 
 const getCoupons = async () => {
     const response = await axios.get(`${base_url}coupon/`, config);
-    console.log(response.json);
-    return response.json;   
+    return response.data;   
 };
 
 const createCoupons = async (coupon) => {
     const response = await axios.post(`${base_url}coupon/`, coupon, config);
-    console.log(response);
-    return response.json;
+    return response.data;
 }
 
 const couponService = {
