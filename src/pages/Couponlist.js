@@ -29,7 +29,7 @@ const columns = [
   },
 ];
 
-const Orders = () => {
+const Couponlist = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCoupons());
@@ -57,7 +57,7 @@ const Orders = () => {
 
   return (
     <div>
-      <h3 className="mb-4 title">Orders</h3>
+      <h3 className="mb-4 title">Coupons</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
@@ -65,4 +65,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default Couponlist;
