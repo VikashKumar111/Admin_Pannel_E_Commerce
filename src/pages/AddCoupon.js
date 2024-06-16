@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { createCoupon, getAllCoupon, resetState } from "../features/coupon/couponSlice";
+import { createCoupon, getAllCoupons, resetState } from "../features/coupon/couponSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -16,11 +16,13 @@ const AddCoupon = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllCoupon());
+    dispatch(getAllCoupons());
   }, []);
 
   const newCoupon = useSelector((state) => state.coupon);
   const { isSuccess, isError, isLoading, createdCoupon } = newCoupon;
+  // console.log(newCoupon);
+
 
   const formik = useFormik({
     initialValues: {
