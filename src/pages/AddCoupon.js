@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { createCoupon, getAllCoupons, resetState } from "../features/coupon/couponSlice";
+import {
+  createCoupon,
+  getAllCoupons,
+  resetState,
+} from "../features/coupon/couponSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -23,7 +27,6 @@ const AddCoupon = () => {
   const { isSuccess, isError, isLoading, createdCoupon } = newCoupon;
   // console.log(newCoupon);
 
-
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -39,12 +42,12 @@ const AddCoupon = () => {
   });
 
   const notification = () => {
-    if (isSuccess) {
+    if (isSuccess && createdCoupon) {
       toast.success("Coupon Added Successfully!");
-      //   setTimeout(() => {
-      //     dispatch(resetState());
-      //     // navigate("/admin/list-brand");
-      //   }, 3000);
+      // setTimeout(() => {
+      //   dispatch(resetState());
+      //   // navigate("/admin/list-brand");
+      // }, 3000);
     }
     if (isError) {
       toast.error("Something Went Wrong!");

@@ -35,10 +35,10 @@ const Addcategory = () => {
   const notification = () => {
     if (isSuccess && createdCategory) {
       toast.success("Category Added Successfully!");
-      setTimeout(() => {
-         dispatch(resetState());
-        // navigate("/admin/list-category");
-      }, 3000);
+      // setTimeout(() => {
+      //    dispatch(resetState());
+      //   // navigate("/admin/list-category");
+      // }, 3000);
     }
     if (isError) {
       toast.error("Something Went Wrong!");

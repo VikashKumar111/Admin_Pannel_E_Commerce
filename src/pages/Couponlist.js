@@ -16,9 +16,9 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "Date",
-    dataIndex: "date",
-    },
+    title: "Discount",
+    dataIndex: "discount",
+  },
   {
     title: "Expiry",
     dataIndex: "expiry",
@@ -34,14 +34,17 @@ const Couponlist = () => {
   useEffect(() => {
     dispatch(getAllCoupons());
   }, []);
-    
-  const couponState = useSelector((state) => state.coupon);
-    // console.log(couponState);
-  
-  
+
+  const couponState = useSelector((state) => state.coupon.coupons);
+  console.log(couponState);
+
   const data1 = [];
   for (let i = 0; i < couponState.length; i++) {
     data1.push({
+      key: i + 1,
+      name: couponState[i].name,
+      discount: couponState[i].discount,
+      expiry: new Date(couponState[i].expiry).toLocaleString(),
       action: (
         <>
           <Link className="fs-3 text-danger" to="/">

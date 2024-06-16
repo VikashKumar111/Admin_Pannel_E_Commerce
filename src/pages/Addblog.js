@@ -73,10 +73,10 @@ const Addblog = () => {
   const notification = () => {
     if (isSuccess && createdBlog) {
       toast.success("Blog Added Successfully!");
-      setTimeout(() => {
-        // navigate("/admin/blog-list");
-         dispatch(resetState());
-      }, 3000);
+      // setTimeout(() => {
+      //   // navigate("/admin/blog-list");
+      //    dispatch(resetState());
+      // }, 3000);
     }
     if (isError) {
       toast.error("Something Went Wrong!");

@@ -6,6 +6,7 @@ import {createBrand, resetState} from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Brand Name is Required"),
@@ -13,6 +14,10 @@ let schema = Yup.object().shape({
 
 const Addbrand = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const getBrandId = location.pathname.split("/")[3];
+  console.log(getBrandId);
+
   // const navigate = useNavigate();
 
   const newBrand = useSelector((state) => state.brand);
@@ -34,10 +39,10 @@ const Addbrand = () => {
   const notification = () => {
     if (isSuccess && createdBrand) {
       toast.success("Brand Added Successfully!");
-      setTimeout(() => {
-         dispatch(resetState());
-        // navigate("/admin/list-brand");
-      }, 3000);
+      // setTimeout(() => {
+      //    dispatch(resetState());
+      //   // navigate("/admin/list-brand");
+      // }, 3000);
     }
     if (isError) {
       toast.error("Something Went Wrong!");

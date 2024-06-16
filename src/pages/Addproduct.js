@@ -153,10 +153,10 @@ const Addproduct = () => {
   const notification = () => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfully!");
-      setTimeout(() => {
-          dispatch(resetState());
-        // navigate("/admin/list-product");
-      }, 3000);
+      // setTimeout(() => {
+      //     dispatch(resetState());
+      //   // navigate("/admin/list-product");
+      // }, 3000);
     }
     if (isError) {
       toast.error("Something Went Wrong!");

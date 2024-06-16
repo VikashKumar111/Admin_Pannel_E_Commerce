@@ -36,10 +36,10 @@ const Addcolor = () => {
   const notification = () => {
     if (isSuccess && createdColor) {
       toast.success("Color Added Successfully!");
-      setTimeout(() => {
-        dispatch(resetState());
-        // navigate("/admin/list-color");
-      }, 3000);
+      // setTimeout(() => {
+      //   dispatch(resetState());
+      //   // navigate("/admin/list-color");
+      // }, 3000);
     }
     if (isError) {
       toast.error("Something Went Wrong!");
