@@ -21,6 +21,7 @@ const columns = [
 const Brandlist = () => {
   const [open, setOpen] = useState(false);
   const [brandId, setBrandId] = useState("");
+  const dispatch = useDispatch();
 
   const showModal = (id) => {
     setOpen(true);
@@ -32,7 +33,6 @@ const Brandlist = () => {
     setOpen(false);
   };
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBrands());
   }, []);
@@ -64,9 +64,12 @@ const Brandlist = () => {
 
   const deleteBrand = (id) => {
     dispatch(deleteABrand(id));
-    setOpen(false);
-    dispatch(getBrands());
-  }
+    // setOpen(false);
+    setTimeout(() => {
+      setOpen(false);
+      dispatch(getBrands());
+    }, 400);
+  };
 
   return (
     <div>
@@ -78,7 +81,7 @@ const Brandlist = () => {
         hideModal={hideModal}
         open={open}
         performAction={() => {
-          deleteBrand(brandId)
+          deleteBrand(brandId);
         }}
         title="Are You Sure You Want To Delete This Brand?"
       />
