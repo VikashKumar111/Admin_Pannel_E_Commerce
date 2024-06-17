@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands } from "../features/brands/brandSlice";
+import { deleteABrand, getBrands } from "../features/brands/brandSlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -63,7 +63,9 @@ const Brandlist = () => {
   }
 
   const deleteBrand = (id) => {
-    alert(id);
+    dispatch(deleteABrand(id));
+    setOpen(false);
+    dispatch(getBrands());
   }
 
   return (
