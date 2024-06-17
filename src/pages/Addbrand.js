@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import {
   createBrand,
   getABrand,
+  getBrands,
   resetState,
   updateABrand,
 } from "../features/brands/brandSlice";
@@ -25,7 +26,7 @@ const Addbrand = () => {
 
   // const navigate = useNavigate();
   const newBrand = useSelector((state) => state.brand);
-  const { isSuccess, isError, isLoading, createdBrand, brandName } = newBrand;
+  const { isSuccess, isError, isLoading, createdBrand, brandName ,updatedBrand} = newBrand;
 
   useEffect(() => {
     if (getBrandId !== undefined) {
@@ -47,8 +48,12 @@ const Addbrand = () => {
       if (getBrandId !== undefined) {
         const data = { id: getBrandId, brandData: values };
         dispatch(updateABrand(data));
-        dispatch(resetState());
-        navigate("/admin/list-brand");
+       
+        dispatch(getBrands());
+        setTimeout(() => {
+          navigate("/admin/list-brand");
+          dispatch(resetState());
+        },2000)
       } else {
         dispatch(createBrand(values));
       }
@@ -61,6 +66,16 @@ const Addbrand = () => {
   const notification = () => {
     if (isSuccess && createdBrand) {
       toast.success("Brand Added Successfully!");
+      // setTimeout(() => {
+      //    dispatch(resetState());
+      //   // navigate("/admin/list-brand");
+      // }, 3000);
+    }
+    if (isError) {
+      toast.error("Something Went Wrong!");
+    }
+    if (isSuccess && updatedBrand) {
+      toast.success("Brand Updated Successfully!");
       // setTimeout(() => {
       //    dispatch(resetState());
       //   // navigate("/admin/list-brand");

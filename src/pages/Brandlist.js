@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands } from "../features/brands/brandSlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 
 const columns = [
   {
@@ -18,6 +19,16 @@ const columns = [
 ];
 
 const Brandlist = () => {
+    const [open, setOpen] = useState(false);
+
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const hideModal = () => {
+    setOpen(false);
+  };
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBrands());
@@ -51,6 +62,7 @@ const Brandlist = () => {
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
+      <CustomModal hideModal={hideModal} open={showModal} title="Are You Sure You Want To Delete This Brand?" />
     </div>
   );
 };
