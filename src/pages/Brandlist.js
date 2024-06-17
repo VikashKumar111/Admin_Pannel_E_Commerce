@@ -19,11 +19,14 @@ const columns = [
 ];
 
 const Brandlist = () => {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [brandId, setBrandId] = useState("");
 
-  const showModal = () => {
+  const showModal = (id) => {
     setOpen(true);
+    setBrandId(id);
   };
+  console.log(brandId);
 
   const hideModal = () => {
     setOpen(false);
@@ -48,12 +51,19 @@ const Brandlist = () => {
           >
             <BiEdit />
           </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
+          <button
+            onClick={() => showModal(brandState[i]._id)}
+            className="ms-3 fs-3 text-danger bg-transparent border-0"
+          >
             <AiFillDelete />
-          </Link>
+          </button>
         </>
       ),
     });
+  }
+
+  const deleteBrand = (id) => {
+    alert(id);
   }
 
   return (
@@ -62,7 +72,14 @@ const Brandlist = () => {
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
-      <CustomModal hideModal={hideModal} open={showModal} title="Are You Sure You Want To Delete This Brand?" />
+      <CustomModal
+        hideModal={hideModal}
+        open={open}
+        performAction={() => {
+          deleteBrand(brandId)
+        }}
+        title="Are You Sure You Want To Delete This Brand?"
+      />
     </div>
   );
 };
