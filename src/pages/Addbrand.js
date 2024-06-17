@@ -25,15 +25,16 @@ const Addbrand = () => {
   useEffect(() => {
     if (getBrandId !== undefined) {
       dispatch(getABrand(getBrandId));
-      formik.values.title = brandName;
+      // formik.values.title = brandName;
     } else {
       dispatch(resetState());
     }
   },[getBrandId])
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
+      title: brandName || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
