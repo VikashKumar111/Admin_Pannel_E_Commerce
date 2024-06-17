@@ -6,11 +6,12 @@ import {
   createBrand,
   getABrand,
   resetState,
+  updateABrand,
 } from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Brand Name is Required"),
@@ -19,6 +20,7 @@ let schema = Yup.object().shape({
 const Addbrand = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const getBrandId = location.pathname.split("/")[3];
 
   // const navigate = useNavigate();
@@ -42,7 +44,15 @@ const Addbrand = () => {
     validationSchema: schema,
     onSubmit: (values) => {
       //   console.log("Submitting form with values:", values);
-      dispatch(createBrand(values));
+      if (getBrandId !== undefined) {
+        const data = { id: getBrandId, brandData: values };
+        dispatch(updateABrand(data));
+        dispatch(resetState());
+        navigate("/admin/list-brand");
+      } else {
+        dispatch(createBrand(values));
+      }
+
       formik.resetForm();
       notification();
     },
@@ -84,7 +94,7 @@ const Addbrand = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            Add Brand
+             {getBrandId !== undefined ? "Edit" : "Add"} Brand
           </button>
         </form>
       </div>
