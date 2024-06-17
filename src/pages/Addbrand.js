@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import {createBrand, getABrand, resetState} from "../features/brands/brandSlice";
+import {
+  createBrand,
+  getABrand,
+  resetState,
+} from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,12 +20,11 @@ const Addbrand = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const getBrandId = location.pathname.split("/")[3];
-  
 
   // const navigate = useNavigate();
   const newBrand = useSelector((state) => state.brand);
   const { isSuccess, isError, isLoading, createdBrand, brandName } = newBrand;
-  
+
   useEffect(() => {
     if (getBrandId !== undefined) {
       dispatch(getABrand(getBrandId));
@@ -29,7 +32,7 @@ const Addbrand = () => {
     } else {
       dispatch(resetState());
     }
-  },[getBrandId])
+  }, [getBrandId]);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -38,7 +41,7 @@ const Addbrand = () => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-    //   console.log("Submitting form with values:", values);
+      //   console.log("Submitting form with values:", values);
       dispatch(createBrand(values));
       formik.resetForm();
       notification();
@@ -60,7 +63,9 @@ const Addbrand = () => {
 
   return (
     <div>
-      <h3 className="mb-4 title">Add Brand</h3>
+      <h3 className="mb-4 title">
+        {getBrandId !== undefined ? "Edit" : "Add"} Brand
+      </h3>
       <div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
