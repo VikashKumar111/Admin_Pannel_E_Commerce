@@ -26,11 +26,17 @@ const getProductCategory = async (id) => {
   return response.data;
 };
 
+const deleteProductCategory = async (id) => {
+  const response = await axios.delete(`${base_url}prodcategory/${id}`, config);
+  return response.data;
+}
+
 const pcategoryService = {
   getProductCategories,
   createProductCategory,
   getProductCategory,
   updateProductCategory,
+  deleteProductCategory,
 };
 
 export default pcategoryService;
