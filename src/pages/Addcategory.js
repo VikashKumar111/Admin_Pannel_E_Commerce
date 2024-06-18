@@ -3,14 +3,15 @@ import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import {
   getACategory,
+  getCategories,
   newProdCategory,
   resetState,
+  updateACategory,
 } from "../features/pcategory/pcategorySlice";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Category is Required"),
@@ -21,10 +22,10 @@ const Addcategory = () => {
   const location = useLocation();
   const getProdCatId = location.pathname.split("/")[3];
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const newProdCat = useSelector((state) => state.pcategory);
-  const { isSuccess, isError, isLoading, createdCategory, categoryName } =
+  const { isSuccess, isError, isLoading, createdCategory, categoryName, updatedCategory} =
     newProdCat;
 
   useEffect(() => {
@@ -43,11 +44,24 @@ const Addcategory = () => {
     validationSchema: schema,
     onSubmit: (values) => {
       //   console.log("Submitting form with values:", values);
-      dispatch(newProdCategory(values));
+      if (getProdCatId !== undefined) {
+        const data = { id: getProdCatId, categoryData: values };
+        dispatch(updateACategory(data));
 
-      
+        // dispatch(getCategories());
+        // setTimeout(() => {
+        //   navigate("/admin/list-category");
+        //   dispatch(resetState());
+        // },[2000])
+      } else {
+         dispatch(newProdCategory(values));
+      }
+
       formik.resetForm();
-      notification();
+      setTimeout(() => {
+            notification();
+       },[2000])
+     
     },
   });
 
@@ -58,6 +72,9 @@ const Addcategory = () => {
       //    dispatch(resetState());
       //   // navigate("/admin/list-category");
       // }, 3000);
+    }
+    if (isSuccess && updatedCategory) {
+      toast.success("Category Updated Successfully!");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
