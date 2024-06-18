@@ -12,9 +12,16 @@ const createProductCategory = async (pcat) => {
   return response.data;
 };
 
+const getProductCategory = async (id) => {
+  const response = await axios.get(`${base_url}prodcategory/${id}`, config);
+  return response.data;
+}
+
+
 const pcategoryService = {
   getProductCategories,
   createProductCategory,
+  getProductCategory,
 };
 
 export default pcategoryService;
