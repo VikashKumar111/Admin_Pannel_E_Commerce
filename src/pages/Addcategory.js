@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
-import { newProdCategory, resetState } from "../features/pcategory/pcategorySlice";
+import {
+  getACategory,
+  newProdCategory,
+  resetState,
+} from "../features/pcategory/pcategorySlice";
 import { toast } from "react-toastify";
-
+import { useLocation } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Category is Required"),
@@ -14,19 +18,34 @@ let schema = Yup.object().shape({
 
 const Addcategory = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const getProdCatId = location.pathname.split("/")[3];
+
   // const navigate = useNavigate();
 
   const newProdCat = useSelector((state) => state.pcategory);
-  const { isSuccess, isError, isLoading, createdCategory } = newProdCat;
+  const { isSuccess, isError, isLoading, createdCategory, categoryName } =
+    newProdCat;
+
+  useEffect(() => {
+    if (getProdCatId !== undefined) {
+      dispatch(getACategory(getProdCatId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getProdCatId]);
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
+      title: categoryName || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-    //   console.log("Submitting form with values:", values);
+      //   console.log("Submitting form with values:", values);
       dispatch(newProdCategory(values));
+
+      
       formik.resetForm();
       notification();
     },
@@ -49,7 +68,7 @@ const Addcategory = () => {
     <div>
       <h3 className="mb-4 title">Add Category</h3>
       <div>
-        <form action=""  onSubmit={formik.handleSubmit}>
+        <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
             type="text"
             name="title"
