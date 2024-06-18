@@ -48,20 +48,17 @@ const Addcategory = () => {
         const data = { id: getProdCatId, categoryData: values };
         dispatch(updateACategory(data));
 
-        // dispatch(getCategories());
-        // setTimeout(() => {
-        //   navigate("/admin/list-category");
-        //   dispatch(resetState());
-        // },[2000])
+        dispatch(getCategories());
+        setTimeout(() => {
+          navigate("/admin/list-category");
+          dispatch(resetState());
+        },[4000])
       } else {
          dispatch(newProdCategory(values));
       }
 
       formik.resetForm();
-      setTimeout(() => {
-            notification();
-       },[2000])
-     
+      notification();
     },
   });
 
