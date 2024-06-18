@@ -5,6 +5,7 @@ import { getCategories } from "../features/pcategory/pcategorySlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 
 
 const columns = [
@@ -34,9 +35,9 @@ const Categorylist = () => {
           <Link className="fs-3 text-danger" to={`/admin/category/${pCatState[i]._id}`}>
             <BiEdit />
           </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
+          <button className="ms-3 fs-3 text-danger" to="/">
             <AiFillDelete />
-          </Link>
+          </button>
         </>
       ),
     });
@@ -47,6 +48,12 @@ const Categorylist = () => {
       <h3 className="mb-4 title">Product Categories</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
+        <CustomModal
+          hideModal={hideModal}
+          open={open}
+          performAction={ }
+          title="Are You Sure You Want To delete This Category?"
+        />
       </div>
     </div>
   );
