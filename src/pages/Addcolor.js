@@ -19,7 +19,7 @@ const Addcolor = () => {
   const getColorId = location.pathname.split("/")[3];
 
   const newColor = useSelector((state) => state.color);
-  const { isSuccess, isError, isLoading, createdColor ,colorName } = newColor;
+  const { isSuccess, isError, isLoading, createdColor ,colorName ,updatedColor} = newColor;
 
   useEffect(() => {
     if (getColorId !== undefined) {
@@ -61,6 +61,9 @@ const Addcolor = () => {
       //   dispatch(resetState());
       //   // navigate("/admin/list-color");
       // }, 3000);
+    }
+    if (isSuccess && updatedColor) {
+      toast.success("Color Updated Successfully!");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
