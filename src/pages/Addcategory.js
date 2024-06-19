@@ -80,7 +80,7 @@ const Addcategory = () => {
 
   return (
     <div>
-      <h3 className="mb-4 title">Add Category</h3>
+      <h3 className="mb-4 title"> {getProdCatId !== undefined ? "Edit" : "Add"} Category</h3>
       <div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
@@ -101,7 +101,7 @@ const Addcategory = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            Add Category
+             {getProdCatId !== undefined ? "Edit" : "Add"} Category
           </button>
         </form>
       </div>
