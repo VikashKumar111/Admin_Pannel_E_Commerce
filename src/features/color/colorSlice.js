@@ -132,7 +132,21 @@ export const colorSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
-      .addCase(deleteAColor)
+      .addCase(deleteAColor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addcase(deleteAColor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedColor = action.payload;
+      })
+      .addCase(deleteAColor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
       .addCase(resetState, () => initialState);
   },
 });
