@@ -31,7 +31,7 @@ const Colorlist = () => {
       name: colorState[i].title,
       action: (
         <>
-          <Link className="fs-3 text-danger" to="/">
+          <Link className="fs-3 text-danger" to={`/admin/color/${colorState[i]._id}`}>
             <BiEdit />
           </Link>
           <Link className="ms-3 fs-3 text-danger" to="/">

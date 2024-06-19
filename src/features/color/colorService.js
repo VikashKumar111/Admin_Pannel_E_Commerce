@@ -13,10 +13,15 @@ const createColor = async (color) => {
     return response.data;
 }
 
+const getColor = async (id) => {
+    const response = await axios.get(`${base_url}color/${id}`, config);
+    return response.data;
+}
 
 const colorService = {
     getColors,
     createColor,
+    getColor,
 };
 
 export default colorService;

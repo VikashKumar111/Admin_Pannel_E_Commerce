@@ -1,28 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createColor, resetState } from "../features/color/colorSlice";
-
+import { createColor, getAColor, resetState } from "../features/color/colorSlice";
+import { useLocation } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Color is Required"),
 });
 
-
 const Addcolor = () => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
+  const location = useLocation();
+  const getColorId = location.pathname.split("/")[3];
 
   const newColor = useSelector((state) => state.color);
-  const { isSuccess, isError, isLoading, createdColor } = newColor;
+  const { isSuccess, isError, isLoading, createdColor ,colorName } = newColor;
+
+  useEffect(() => {
+    if (getColorId !== undefined) {
+      dispatch(getAColor(getColorId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getColorId]);
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
+      title: colorName || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
