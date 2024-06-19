@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createColor, getAColor, resetState } from "../features/color/colorSlice";
+import { createColor, getAColor, resetState, updateAColor } from "../features/color/colorSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 
 let schema = Yup.object().shape({
@@ -40,7 +40,7 @@ const Addcolor = () => {
 
       if (getColorId !== undefined) {
         const data = { id: getColorId, colorData: values };
-        dispatch(updateColor(data));
+        dispatch(updateAColor(data));
 
         setTimeout(() => {
           navigate("/admin/list-color");
