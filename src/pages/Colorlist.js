@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getColors } from "../features/color/colorSlice";
+import { deleteAColor, getColors } from "../features/color/colorSlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -65,8 +65,13 @@ const Colorlist = () => {
   }
 
   const deleteColor = (id) => {
-    console.log(id);
-  }
+    dispatch(deleteAColor(id));
+
+    setTimeout(() => {
+      setOpen(false);
+      dispatch(getColors())
+    }, 400);
+  };
 
   return (
     <div>

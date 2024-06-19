@@ -135,7 +135,7 @@ export const colorSlice = createSlice({
       .addCase(deleteAColor.pending, (state) => {
         state.isLoading = true;
       })
-      .addcase(deleteAColor.fulfilled, (state, action) => {
+      .addCase(deleteAColor.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
