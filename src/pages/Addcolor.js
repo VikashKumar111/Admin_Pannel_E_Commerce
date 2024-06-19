@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createColor, getAColor, resetState } from "../features/color/colorSlice";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Color is Required"),
@@ -14,7 +14,7 @@ let schema = Yup.object().shape({
 
 const Addcolor = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const getColorId = location.pathname.split("/")[3];
 
@@ -37,7 +37,18 @@ const Addcolor = () => {
     validationSchema: schema,
     onSubmit: (values) => {
       //   console.log("Submitting form with values:", values);
-      dispatch(createColor(values));
+
+      if (getColorId !== undefined) {
+        const data = { id: getColorId, colorData: values };
+        dispatch(updateColor(data));
+
+        setTimeout(() => {
+          navigate("/admin/list-color");
+        },[1000])
+      } else {
+        dispatch(createColor(values));
+      }
+      
       formik.resetForm();
       notification();
     },
