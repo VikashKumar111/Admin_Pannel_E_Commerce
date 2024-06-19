@@ -45,6 +45,17 @@ export const getAColor = createAsyncThunk(
   }
 )
 
+export const deleteAColor = createAsyncThunk(
+  "colors/delete-color",
+  async (id, thunkAPI) => {
+    try {
+      return await colorService.deleteColor(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+)
+
 export const resetState = createAction("Reset_all");
 
 const initialState = {
@@ -121,6 +132,7 @@ export const colorSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
+      .addCase(deleteAColor)
       .addCase(resetState, () => initialState);
   },
 });

@@ -64,7 +64,9 @@ const Colorlist = () => {
     });
   }
 
-  const deleteColor=()
+  const deleteColor = (id) => {
+    console.log(id);
+  }
 
   return (
     <div>
