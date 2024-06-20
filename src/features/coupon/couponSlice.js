@@ -111,7 +111,7 @@ export const createCoupon = createAsyncThunk(
 );
 
 export const updateACoupon = createAsyncThunk(
-  "coupon/get-coupon",
+  "coupon/update-coupon",
   async (coupon, thunkAPI) => {
     try {
       return await couponService.updateCoupon(coupon);

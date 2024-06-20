@@ -7,6 +7,7 @@ import {
   getACoupon,
   getAllCoupons,
   resetState,
+  updateACoupon,
 } from "../features/coupon/couponSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -25,13 +26,11 @@ const AddCoupon = () => {
 
   console.log(couponId);
 
- 
+  useEffect(() => {
+    dispatch(getAllCoupons());
+  }, []);
 
-  // useEffect(() => {
-  //   dispatch(getAllCoupons());
-  // }, []);
-
-   useEffect(() => {
+  useEffect(() => {
     if (couponId) {
       dispatch(getACoupon(couponId));
     } else {
@@ -40,25 +39,39 @@ const AddCoupon = () => {
   }, [couponId]);
 
   const newCoupon = useSelector((state) => state.coupon);
-  const { isSuccess, isError, isLoading, createdCoupon , couponName,couponExpiry,couponDiscount} = newCoupon;
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+    createdCoupon,
+    couponName,
+    couponExpiry,
+    couponDiscount,
+  } = newCoupon;
   // console.log(newCoupon);
+
+  const changeDateFormat = (date) => {
+    const formattedDate = new Date(date).toLocaleDateString();
+    const [month, day, year] = formattedDate.split("/");
+    return [year, month, day].join("-");
+  };
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       name: couponName || "",
-      expiry: couponExpiry || "",
+      expiry: changeDateFormat(couponExpiry) || "",
       discount: couponDiscount || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
       if (couponId !== undefined) {
         const data = { id: couponId, couponData: values };
-        dispatch(updateCoupon(data));
+        dispatch(updateACoupon(data));
       } else {
-         dispatch(createCoupon(values));
+        dispatch(createCoupon(values));
       }
-     
+
       formik.resetForm();
       notification();
     },
