@@ -47,7 +47,7 @@ const Couponlist = () => {
       expiry: new Date(couponState[i].expiry).toLocaleString(),
       action: (
         <>
-          <Link className="fs-3 text-danger" to="/">
+          <Link className="fs-3 text-danger" to={`/admin/coupon/${couponState[i]._id}`}>
             <BiEdit />
           </Link>
           <Link className="ms-3 fs-3 text-danger" to="/">
