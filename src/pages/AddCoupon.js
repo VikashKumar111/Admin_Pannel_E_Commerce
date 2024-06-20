@@ -221,7 +221,7 @@ const AddCoupon = () => {
 
         setTimeout(() => {
           navigate("/admin/list-coupon")
-        },[1000])
+        },1000)
       } else {
         dispatch(createCoupon(values));
       }

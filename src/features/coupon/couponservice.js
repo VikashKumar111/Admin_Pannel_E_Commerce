@@ -31,13 +31,17 @@ const getCoupon = async (id) => {
   return response.data;
 };
 
-
+const deleteCoupon = async (id) => {
+    const response = await axios.delete(`${base_url}coupon/${id}`, config);
+    return response.data;
+}
 
 const couponService = {
   getCoupons,
   createCoupons,
   getCoupon,
-  updateCoupon,
+    updateCoupon,
+  deleteCoupon,
 };
 
 export default couponService;

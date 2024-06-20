@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { getAllCoupons } from "../features/coupon/couponSlice";
+import { deleteACoupon, getAllCoupons } from "../features/coupon/couponSlice";
 import CustomModal from "../components/CustomModal";
 
 const columns = [
@@ -73,6 +73,15 @@ const Couponlist = () => {
       ),
     });
   }
+  
+  const deleteCoupon = (id) => {
+    dispatch(deleteACoupon(id));
+
+    setTimeout(() => {
+      setOpen(false);
+      dispatch(getAllCoupons());
+    },400)
+  }
 
   return (
     <div>
@@ -83,7 +92,7 @@ const Couponlist = () => {
       <CustomModal 
         hideModal={hideModal}
         open={open}
-
+        performAction={()=>deleteCoupon(couponId)}
         title="Are You Sure You Want to Delete This Coupon?"
       />
     </div>
