@@ -116,6 +116,7 @@ export const getACoupon = createAsyncThunk(
     try {
       const response = await couponService.getCoupon(id);
       console.log(response);
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -176,10 +177,13 @@ const couponSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getACoupon.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.isLoading= false;
         state.isError = false;
         state.isSuccess = true;
         state.couponName = action.payload.name;
+        state.couponExpiry = action.payload.expiry;
+        state.couponDiscount = action.payload.discount;
       })
       .addCase(getACoupon.rejected, (state, action) => {
         state.isLoading = false;

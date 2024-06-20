@@ -25,27 +25,40 @@ const AddCoupon = () => {
 
   console.log(couponId);
 
-  if (couponId) {
-    dispatch(getACoupon(couponId));
-  }
+ 
 
-  useEffect(() => {
-    dispatch(getAllCoupons());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllCoupons());
+  // }, []);
+
+   useEffect(() => {
+    if (couponId) {
+      dispatch(getACoupon(couponId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [couponId]);
 
   const newCoupon = useSelector((state) => state.coupon);
-  const { isSuccess, isError, isLoading, createdCoupon } = newCoupon;
+  const { isSuccess, isError, isLoading, createdCoupon , couponName,couponExpiry,couponDiscount} = newCoupon;
   // console.log(newCoupon);
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      name: "",
-      expiry: "",
-      discount: "",
+      name: couponName || "",
+      expiry: couponExpiry || "",
+      discount: couponDiscount || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(createCoupon(values));
+      if (couponId !== undefined) {
+        const data = { id: couponId, couponData: values };
+        dispatch(updateCoupon(data));
+      } else {
+         dispatch(createCoupon(values));
+      }
+     
       formik.resetForm();
       notification();
     },
