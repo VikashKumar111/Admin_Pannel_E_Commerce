@@ -9,6 +9,7 @@ import {
 } from "../features/coupon/couponSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 let schema = Yup.object().shape({
   name: Yup.string().required("Coupon Name is Required"),
@@ -18,6 +19,14 @@ let schema = Yup.object().shape({
 
 const AddCoupon = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const couponId = location.pathname.split("/")[3];
+
+  console.log(couponId);
+
+  if (couponId) {
+    
+  }
 
   useEffect(() => {
     dispatch(getAllCoupons());
