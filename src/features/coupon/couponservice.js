@@ -21,8 +21,8 @@ const updateCoupon = async (coupon) => {
       discount: coupon.couponData.discount,
     },
     config
-    );
-    return response.data;
+  );
+  return response.data;
 };
 
 const getCoupon = async (id) => {
@@ -35,6 +35,7 @@ const couponService = {
   getCoupons,
   createCoupons,
   getCoupon,
+  updateCoupon,
 };
 
 export default couponService;

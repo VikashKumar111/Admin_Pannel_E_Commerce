@@ -110,6 +110,17 @@ export const createCoupon = createAsyncThunk(
   }
 );
 
+export const updateACoupon = createAsyncThunk(
+  "coupon/get-coupon",
+  async (coupon, thunkAPI) => {
+    try {
+      return await couponService.updateCoupon(coupon);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+)
+
 export const getACoupon = createAsyncThunk(
   "coupon/get-coupon",
   async (id, thunkAPI) => {
