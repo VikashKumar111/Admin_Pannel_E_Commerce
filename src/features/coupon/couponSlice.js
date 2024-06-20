@@ -202,6 +202,21 @@ const couponSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
+      .addCase(updateACoupon.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateACoupon.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedCoupon = action.payload;
+      })
+      .addCase(updateACoupon.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
       .addCase(resetState, () => initialState);
   },
 });
