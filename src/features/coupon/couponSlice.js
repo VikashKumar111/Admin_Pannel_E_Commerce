@@ -121,6 +121,7 @@ export const getACoupon = createAsyncThunk(
     }
   }
 )
+
 // Action to reset state
 export const resetState = createAction("coupons/resetState");
 
@@ -178,7 +179,7 @@ const couponSlice = createSlice({
         state.isLoading= false;
         state.isError = false;
         state.isSuccess = true;
-        state.couponName = action.payload.title;
+        state.couponName = action.payload.name;
       })
       .addCase(getACoupon.rejected, (state, action) => {
         state.isLoading = false;

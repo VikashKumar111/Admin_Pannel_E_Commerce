@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import {
   createCoupon,
+  getACoupon,
   getAllCoupons,
   resetState,
 } from "../features/coupon/couponSlice";
@@ -25,7 +26,7 @@ const AddCoupon = () => {
   console.log(couponId);
 
   if (couponId) {
-    
+    dispatch(getACoupon(couponId));
   }
 
   useEffect(() => {
