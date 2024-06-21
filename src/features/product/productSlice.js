@@ -110,6 +110,16 @@ export const createProducts = createAsyncThunk(
   }
 );
 
+export const updateAProduct = createAsyncThunk(
+  "product/update-product",
+  async (product, thunkAPI) => {
+    try {
+      return await productService.updateProduct(product);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+)
 
 export const getAProduct = createAsyncThunk(
   "product/get-product",
@@ -188,6 +198,21 @@ export const productSlice = createSlice({
       })
       .addCase(getAProduct.rejected, (state, action) => {
         state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(updateAProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAProduct.fulfilled, (state,action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedProduct = action.payload;
+      })
+      .addCase(updateAProduct.rejected, (state,action) => {
+        state.isLoading= false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;

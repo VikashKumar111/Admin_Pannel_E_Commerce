@@ -245,7 +245,7 @@ const AddCoupon = () => {
 
   return (
     <div>
-      <h3>Add Coupon</h3>
+      <h3>{couponId !== undefined ? "Edit" : "Add"} Coupon</h3>
       <div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
@@ -288,7 +288,7 @@ const AddCoupon = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            Add Coupon
+             <h3>{couponId !== undefined ? "Edit" : "Add"} Coupon</h3>
           </button>
         </form>
       </div>
