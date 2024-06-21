@@ -11,7 +11,11 @@ import { getColors } from "../features/color/colorSlice";
 import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { dltImg, uploadImg } from "../features/upload/uploadSlice";
-import { createProducts, resetState } from "../features/product/productSlice";
+import {
+  createProducts,
+  getAProduct,
+  resetState,
+} from "../features/product/productSlice";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
@@ -33,7 +37,7 @@ let schema = Yup.object().shape({
 const Addproduct = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [color, setColor] = useState([]);
+  const [colorr, setColorr] = useState([]);
   const productId = location.pathname.split("/")[3];
 
   // const navigate = useNavigate();
@@ -53,14 +57,27 @@ const Addproduct = () => {
     }
   }, [productId, dispatch]);
 
-  
   const brandState = useSelector((state) => state.brand.brands);
   const catState = useSelector((state) => state.pcategory.pCategories);
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
   const newProduct = useSelector((state) => state.product);
   // console.log(newProduct);
-  const { isSuccess, isLoading, isError, createdProduct } = newProduct;
+  const {
+    isSuccess,
+    isLoading,
+    isError,
+    createdProduct,
+    productName,
+    description,
+    price,
+    brand,
+    category,
+    tags,
+    color,
+    quantity,
+    images,
+  } = newProduct;
 
   // useEffect(() => {
   //   if (isSuccess && createdProduct) {
@@ -71,7 +88,6 @@ const Addproduct = () => {
   //   }
   // }, [isSuccess, isLoading, isError]);
 
-  
   // useEffect(() => {
   //   if (isSuccess && createdProduct) {
   //     toast.success("Product Added Successfully!");
@@ -82,9 +98,7 @@ const Addproduct = () => {
   //   if (isError) {
   //     toast.error("Something Went Wrong!");
   //   }
-  // }, [isSuccess, isError, navigate]); 
-
-
+  // }, [isSuccess, isError, navigate]);
 
   const imge = imgState.map(({ public_id: id, url }) => ({
     id,
@@ -119,9 +133,9 @@ const Addproduct = () => {
   });
 
   useEffect(() => {
-    formik.values.color = color ? color : " ";
+    formik.values.color = colorr ? colorr : " ";
     formik.values.images = img;
-  }, [color, img]);
+  }, [colorr, img]);
 
   const formik = useFormik({
     initialValues: {
@@ -139,7 +153,7 @@ const Addproduct = () => {
     onSubmit: (values) => {
       dispatch(createProducts(values));
       formik.resetForm();
-      setColor(null);
+      setColorr(null);
       dispatch(dltImg(imge.id));
       notification();
       // setTimeout(() => {
@@ -147,8 +161,6 @@ const Addproduct = () => {
       // }, 3000);
     },
   });
-  
-  
 
   // const handleColors = (e) => {
   //   console.log(color);
@@ -157,7 +169,7 @@ const Addproduct = () => {
   // };
 
   const handleColors = (selectedColors) => {
-    setColor(selectedColors);
+    setColorr(selectedColors);
     formik.setFieldValue("color", selectedColors);
     // console.log(color);
   };
@@ -275,7 +287,7 @@ const Addproduct = () => {
           allowClear
           className="w-100"
           placeholder="Select colors"
-          value={color}
+          value={colorr}
           onChange={(e) => handleColors(e)}
           options={coloropt}
         />
