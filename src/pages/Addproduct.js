@@ -47,7 +47,7 @@ const Addproduct = () => {
     dispatch(getCategories());
     dispatch(getColors());
     // formik.values.color = color;
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (productId) {
@@ -132,22 +132,28 @@ const Addproduct = () => {
     });
   });
 
-  useEffect(() => {
-    formik.values.color = colorr ? colorr : " ";
-    formik.values.images = img;
-  }, [colorr, img]);
+  // useEffect(() => {
+  //   formik.values.color = colorr ? colorr : " ";
+  //   formik.values.images = img;
+  // }, [colorr, img]);
+
+  // useEffect(() => {
+  //   formik.setFieldValue("color", colorr);
+  //   formik.setFieldValue("images", img);
+  // }, [colorr, img]);
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
-      description: "",
-      price: "",
-      brand: "",
-      category: "",
-      tags: "",
-      color: [],
-      quantity: "",
-      images: "",
+      title: productName || "",
+      description: description || "",
+      price: price || "",
+      brand: brand || "",
+      category: category || "",
+      tags: tags || "",
+      color: color || [],
+      quantity: quantity || "",
+      images: images || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
