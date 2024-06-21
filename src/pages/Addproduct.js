@@ -448,7 +448,7 @@ const Addproduct = () => {
       tags: newProduct.tags || "",
       color: newProduct?.color || [],
       quantity: newProduct.quantity || "",
-      images: newProduct?.images|| "",
+      images: newProduct?.images || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -494,7 +494,10 @@ const Addproduct = () => {
 
   return (
     <div>
-      <h3 className="mb-4 title"> <h3>{productId !== undefined ? "Edit" : "Add"} Product</h3></h3>
+      <h3 className="mb-4 title">
+        {" "}
+        <h3>{productId !== undefined ? "Edit" : "Add"} Product</h3>
+      </h3>
       <form onSubmit={formik.handleSubmit} className="d-flex gap-3 flex-column">
         <CustomInput
           type="text"
@@ -581,7 +584,7 @@ const Addproduct = () => {
           <option value="special">Special</option>
         </select>
         <div className="error">{formik.touched.tags && formik.errors.tags}</div>
-        <Select
+        {/* <Select
           mode="multiple"
           allowClear
           className="w-100"
@@ -589,7 +592,28 @@ const Addproduct = () => {
           value={colorr}
           onChange={handleColors}
           options={coloropt}
-        />
+        /> */}
+        {newProduct?.color ? (
+          <Select
+            mode="multiple"
+            allowClear
+            className="w-100"
+            placeholder="Select colors"
+            value={newProduct.color}
+            onChange={handleColors}
+            options={coloropt}
+          />
+        ) : (
+          <Select
+            mode="multiple"
+            allowClear
+            className="w-100"
+            placeholder="Select colors"
+            value={colorr}
+            onChange={handleColors}
+            options={coloropt}
+          />
+        )}
         <div className="error">
           {formik.touched.color && formik.errors.color}
         </div>
@@ -616,7 +640,35 @@ const Addproduct = () => {
             )}
           </Dropzone>
         </div>
-        <div className="showimages d-flex flex-wrap gap-3">
+        {/* <div className="showimages d-flex flex-wrap gap-3">
+          {img.map((i, j) => (
+            <div key={j} className="position-relative">
+              <button
+                type="button"
+                onClick={() => dispatch(dltImg(i.public_id))}
+                className="btn-close position-absolute"
+                style={{ top: "10px", right: "10px" }}
+              ></button>
+              <img src={i.url} alt="" width={200} height={200} />
+            </div>
+          ))}
+        </div> */}
+        {newProduct?.images ? (
+           <div className="showimages d-flex flex-wrap gap-3">
+          {newProduct.images.map((i, j) => (
+            <div key={j} className="position-relative">
+              <button
+                type="button"
+                onClick={() => dispatch(dltImg(i.public_id))}
+                className="btn-close position-absolute"
+                style={{ top: "10px", right: "10px" }}
+              ></button>
+              <img src={i.url} alt="" width={200} height={200} />
+            </div>
+          ))}
+        </div>
+        ) : (
+           <div className="showimages d-flex flex-wrap gap-3">
           {img.map((i, j) => (
             <div key={j} className="position-relative">
               <button
@@ -629,11 +681,12 @@ const Addproduct = () => {
             </div>
           ))}
         </div>
+        )}
         <button
           className="btn btn-success border-0 rounded-3 my-5"
           type="submit"
         >
-           {productId !== undefined ? "Edit" : "Add"} Product
+          {productId !== undefined ? "Edit" : "Add"} Product
         </button>
       </form>
     </div>
