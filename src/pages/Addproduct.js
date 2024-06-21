@@ -14,6 +14,7 @@ import { dltImg, uploadImg } from "../features/upload/uploadSlice";
 import { createProducts, resetState } from "../features/product/productSlice";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -31,7 +32,9 @@ let schema = Yup.object().shape({
 
 const Addproduct = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const [color, setColor] = useState([]);
+  const productId = location.pathname.split("/")[3];
 
   // const navigate = useNavigate();
 
@@ -42,6 +45,15 @@ const Addproduct = () => {
     // formik.values.color = color;
   }, []);
 
+  useEffect(() => {
+    if (productId) {
+      dispatch(getAProduct(productId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [productId, dispatch]);
+
+  
   const brandState = useSelector((state) => state.brand.brands);
   const catState = useSelector((state) => state.pcategory.pCategories);
   const colorState = useSelector((state) => state.color.colors);
