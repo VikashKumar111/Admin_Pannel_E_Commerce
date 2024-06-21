@@ -1,6 +1,6 @@
 import axios from "axios";
 import { base_url } from "../../utils/base_url";
-// import { config } from "../../utils/axiosconfig";
+import { config } from "../../utils/axiosconfig";
 
 const getProducts = async () => {
   const response = await axios.get(`${base_url}product/`);
@@ -64,9 +64,16 @@ const createProduct = async (product) => {
   }
 };
 
+
+const getProduct = async (id) => {
+  const response = await axios.get(`${base_url}product/${id}`, config);
+  return response.data;
+}
+
 const productService = {
   getProducts,
   createProduct,
+  getProduct,
 };
 
 export default productService;
