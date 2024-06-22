@@ -480,6 +480,10 @@ const Addproduct = () => {
       if (productId !== undefined) {
         const data = { id: productId, productData: values };
         dispatch(updateAProduct(data));
+          if (updateImages.length > 0) {
+          // Check if there are images to delete
+          dispatch(dltImg(updateImages.map((image) => image.public_id)));
+        }
       } else {
         dispatch(createProducts(values));
 
