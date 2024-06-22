@@ -404,12 +404,32 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
   const newProduct = useSelector((state) => state.product);
-  const { isSuccess, isError, createdProduct, color } = newProduct;
+  const { isSuccess, isError, createdProduct, color , images } = newProduct;
 
   const [updateColor, setUpdateColor] = useState(color);
+  const [updateImages,setUpdateImages]=useState(images)
 
   console.log(color);
   console.log(updateColor);
+
+    console.log(images);
+  console.log(updateImages);
+
+  // if (color) {
+  //   setUpdateColor(color);
+  //   console.log(updateColor);
+  // }
+
+  useEffect(() => {
+    setUpdateColor(color);
+    console.log(updateColor);
+  }, [color]);
+
+   useEffect(() => {
+    setUpdateImages(images);
+    console.log(updateImages);
+  }, [images]);
+
   useEffect(() => {
     if (productId) {
       dispatch(getAProduct(productId));
@@ -417,8 +437,6 @@ const Addproduct = () => {
       dispatch(resetState());
     }
   }, [dispatch, productId]);
-
-  
 
   // const selectedColors = newProduct?.color
   //   ?.map((colorId) => colorState.find((color) => color._id === colorId))
@@ -492,6 +510,7 @@ const Addproduct = () => {
   const handleImages = (acceptedFiles) => {
     dispatch(uploadImg(acceptedFiles)).then((response) => {
       formik.setFieldValue("images", response.payload);
+      setUpdateImages(response.payload);
     });
   };
 
@@ -664,9 +683,9 @@ const Addproduct = () => {
             </div>
           ))}
         </div> */}
-        {newProduct?.images ? (
+        {updateImages ? (
           <div className="showimages d-flex flex-wrap gap-3">
-            {newProduct.images.map((i, j) => (
+            {updateImages.map((i, j) => (
               <div key={j} className="position-relative">
                 <button
                   type="button"
