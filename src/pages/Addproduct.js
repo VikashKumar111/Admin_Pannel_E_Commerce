@@ -404,16 +404,16 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
   const newProduct = useSelector((state) => state.product);
-  const { isSuccess, isError, createdProduct, color , images } = newProduct;
+  const { isSuccess, isError, createdProduct, color, images } = newProduct;
 
   const [updateColor, setUpdateColor] = useState(color);
-  const [updateImages,setUpdateImages]=useState(images)
+  const [updateImages, setUpdateImages] = useState(images);
 
-  console.log(color);
-  console.log(updateColor);
+  // console.log(color);
+  // console.log(updateColor);
 
-    console.log(images);
-  console.log(updateImages);
+  //   console.log(images);
+  // console.log(updateImages);
 
   // if (color) {
   //   setUpdateColor(color);
@@ -425,7 +425,7 @@ const Addproduct = () => {
     console.log(updateColor);
   }, [color]);
 
-   useEffect(() => {
+  useEffect(() => {
     setUpdateImages(images);
     console.log(updateImages);
   }, [images]);
@@ -480,7 +480,7 @@ const Addproduct = () => {
       if (productId !== undefined) {
         const data = { id: productId, productData: values };
         dispatch(updateAProduct(data));
-          if (updateImages.length > 0) {
+        if (updateImages.length > 0) {
           // Check if there are images to delete
           dispatch(dltImg(updateImages.map((image) => image.public_id)));
         }
@@ -687,7 +687,7 @@ const Addproduct = () => {
             </div>
           ))}
         </div> */}
-        {updateImages ? (
+        {updateImages !== undefined ? (
           <div className="showimages d-flex flex-wrap gap-3">
             {updateImages.map((i, j) => (
               <div key={j} className="position-relative">
@@ -697,6 +697,7 @@ const Addproduct = () => {
                   className="btn-close position-absolute"
                   style={{ top: "10px", right: "10px" }}
                 ></button>
+                console.log("updateimg is running")
                 <img src={i.url} alt="" width={200} height={200} />
               </div>
             ))}
@@ -711,6 +712,7 @@ const Addproduct = () => {
                   className="btn-close position-absolute"
                   style={{ top: "10px", right: "10px" }}
                 ></button>
+                console.log("img is running")
                 <img src={i.url} alt="" width={200} height={200} />
               </div>
             ))}
