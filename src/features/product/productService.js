@@ -83,7 +83,7 @@ const getProduct = async (id) => {
   return response.data;
 };
 
-const deleteCoupon = async (id) => {
+const deleteProduct = async (id) => {
   const response = await axios.delete(`${base_url}product/${id}`, config);
   return response.data;
 }
@@ -93,7 +93,7 @@ const productService = {
   createProduct,
   getProduct,
   updateProduct,
-  deleteCoupon,
+  deleteProduct,
 };
 
 export default productService;
