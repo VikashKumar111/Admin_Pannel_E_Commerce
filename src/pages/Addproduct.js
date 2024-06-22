@@ -390,6 +390,7 @@ const Addproduct = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [colorr, setColorr] = useState([]);
+
   const productId = location.pathname.split("/")[3];
 
   useEffect(() => {
@@ -398,6 +399,17 @@ const Addproduct = () => {
     dispatch(getColors());
   }, [dispatch]);
 
+  const brandState = useSelector((state) => state.brand.brands);
+  const catState = useSelector((state) => state.pcategory.pCategories);
+  const colorState = useSelector((state) => state.color.colors);
+  const imgState = useSelector((state) => state.upload.images);
+  const newProduct = useSelector((state) => state.product);
+  const { isSuccess, isError, createdProduct, color } = newProduct;
+
+  const [updateColor, setUpdateColor] = useState(color);
+
+  console.log(color);
+  console.log(updateColor);
   useEffect(() => {
     if (productId) {
       dispatch(getAProduct(productId));
@@ -406,12 +418,7 @@ const Addproduct = () => {
     }
   }, [dispatch, productId]);
 
-  const brandState = useSelector((state) => state.brand.brands);
-  const catState = useSelector((state) => state.pcategory.pCategories);
-  const colorState = useSelector((state) => state.color.colors);
-  const imgState = useSelector((state) => state.upload.images);
-  const newProduct = useSelector((state) => state.product);
-  const { isSuccess, isError, createdProduct } = newProduct;
+  
 
   // const selectedColors = newProduct?.color
   //   ?.map((colorId) => colorState.find((color) => color._id === colorId))
@@ -477,6 +484,11 @@ const Addproduct = () => {
     formik.setFieldValue("color", selectedColors);
   };
 
+  const handleUpdateColor = (selectedColors) => {
+    setUpdateColor(selectedColors);
+    formik.setFieldValue("color", updateColor);
+  };
+
   const handleImages = (acceptedFiles) => {
     dispatch(uploadImg(acceptedFiles)).then((response) => {
       formik.setFieldValue("images", response.payload);
@@ -495,7 +507,6 @@ const Addproduct = () => {
   return (
     <div>
       <h3 className="mb-4 title">
-        {" "}
         <h3>{productId !== undefined ? "Edit" : "Add"} Product</h3>
       </h3>
       <form onSubmit={formik.handleSubmit} className="d-flex gap-3 flex-column">
@@ -599,8 +610,8 @@ const Addproduct = () => {
             allowClear
             className="w-100"
             placeholder="Select colors"
-            value={newProduct.color}
-            onChange={handleColors}
+            value={updateColor}
+            onChange={handleUpdateColor}
             options={coloropt}
           />
         ) : (
@@ -654,33 +665,33 @@ const Addproduct = () => {
           ))}
         </div> */}
         {newProduct?.images ? (
-           <div className="showimages d-flex flex-wrap gap-3">
-          {newProduct.images.map((i, j) => (
-            <div key={j} className="position-relative">
-              <button
-                type="button"
-                onClick={() => dispatch(dltImg(i.public_id))}
-                className="btn-close position-absolute"
-                style={{ top: "10px", right: "10px" }}
-              ></button>
-              <img src={i.url} alt="" width={200} height={200} />
-            </div>
-          ))}
-        </div>
+          <div className="showimages d-flex flex-wrap gap-3">
+            {newProduct.images.map((i, j) => (
+              <div key={j} className="position-relative">
+                <button
+                  type="button"
+                  onClick={() => dispatch(dltImg(i.public_id))}
+                  className="btn-close position-absolute"
+                  style={{ top: "10px", right: "10px" }}
+                ></button>
+                <img src={i.url} alt="" width={200} height={200} />
+              </div>
+            ))}
+          </div>
         ) : (
-           <div className="showimages d-flex flex-wrap gap-3">
-          {img.map((i, j) => (
-            <div key={j} className="position-relative">
-              <button
-                type="button"
-                onClick={() => dispatch(dltImg(i.public_id))}
-                className="btn-close position-absolute"
-                style={{ top: "10px", right: "10px" }}
-              ></button>
-              <img src={i.url} alt="" width={200} height={200} />
-            </div>
-          ))}
-        </div>
+          <div className="showimages d-flex flex-wrap gap-3">
+            {img.map((i, j) => (
+              <div key={j} className="position-relative">
+                <button
+                  type="button"
+                  onClick={() => dispatch(dltImg(i.public_id))}
+                  className="btn-close position-absolute"
+                  style={{ top: "10px", right: "10px" }}
+                ></button>
+                <img src={i.url} alt="" width={200} height={200} />
+              </div>
+            ))}
+          </div>
         )}
         <button
           className="btn btn-success border-0 rounded-3 my-5"
