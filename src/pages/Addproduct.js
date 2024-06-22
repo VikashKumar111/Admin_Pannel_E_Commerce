@@ -404,10 +404,10 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
   const newProduct = useSelector((state) => state.product);
-  const { isSuccess, isError, createdProduct, color, images } = newProduct;
+  const { isSuccess, isError, createdProduct, color } = newProduct;
 
   const [updateColor, setUpdateColor] = useState(color);
-  const [updateImages, setUpdateImages] = useState(images);
+  const [updateImages, setUpdateImages] = useState(newProduct.images);
 
   // console.log(color);
   // console.log(updateColor);
@@ -426,9 +426,9 @@ const Addproduct = () => {
   }, [color]);
 
   useEffect(() => {
-    setUpdateImages(images);
+    setUpdateImages(newProduct.images);
     console.log(updateImages);
-  }, [images]);
+  }, [newProduct.images]);
 
   useEffect(() => {
     if (productId) {

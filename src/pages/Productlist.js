@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../features/product/productSlice";
 import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 
 const columns = [
   {
@@ -42,7 +43,20 @@ const columns = [
 ];
 
 const Productlist = () => {
+  const [open, setOpen] = useState(false);
+  const [productId, setProductId] = useState("");
   const dispatch = useDispatch();
+
+
+  const showModal = (id) => {
+    setOpen(true);
+    setProductId(id);
+  }
+  
+  const hideModal = () => {
+    setOpen(false);
+  }
+
   useEffect(() => {
     dispatch(getProducts());
   }, []);
@@ -66,19 +80,35 @@ const Productlist = () => {
           <Link className="fs-3 text-danger" to={`/admin/product/${productState[i]._id}`}>
             <BiEdit />
           </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
+          <button onClick={()=>showModal(productState[i]._id)} className="ms-3 fs-3 text-danger bg-transparent border-0" to="/">
             <AiFillDelete />
-          </Link>
+          </button>
         </>
       ),
     });
   }
+
+  const deleteProduct = (id) => {
+    dispatch(deleteAProduct(id));
+
+    setTimeout(() => {
+      setOpen(false);
+      dispatch(getProducts());
+    },400)
+  }
+
   return (
     <div>
       <h3 className="mb-4 title">Products</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
+      <CustomModal
+        open={open}
+        hideModal={hideModal}
+        performAction={()=>deleteProduct(productId)}
+        title="Are You Sure You Want to Delete This Product?"
+      />
     </div>
   );
 };
