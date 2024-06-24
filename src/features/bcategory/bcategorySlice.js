@@ -82,7 +82,22 @@ const bcategorySlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
-       .addCase(resetState, () => initialState);;
+      .addCase(getABlogCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getABlogCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.blogCategoryName = action.payload.title;
+      })
+      .addCase(getABlogCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(resetState, () => initialState);;
   },
 });
 
