@@ -6,7 +6,7 @@ import { getABlogCategory, newBlogCategory, resetState, updateABlogCategory } fr
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Category is Required"),
@@ -16,10 +16,10 @@ const Addblogcat = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const getBlogCatId = location.pathname.split("/")[3];
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const newBlogCat = useSelector((state) => state.bCategory);
-  const { isSuccess, isError, isLoading, createdBlogCategory, blogCategoryName ,updatedBlogCategory} = newBlogCat;
+  const { isSuccess, isError, createdBlogCategory, blogCategoryName ,updatedBlogCategory} = newBlogCat;
     
 
   useEffect(() => {
@@ -42,6 +42,9 @@ const Addblogcat = () => {
       if (getBlogCatId !== undefined) {
         const data = { id: getBlogCatId, blogCategoryData: values };
         dispatch(updateABlogCategory(data));
+        setTimeout(() => {
+          navigate("/admin/blog-category-list")
+        },1000)
       } else {
          dispatch(newBlogCategory(values));
       }

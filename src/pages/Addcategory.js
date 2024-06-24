@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getACategory,
-  getCategories,
   newProdCategory,
   resetState,
   updateACategory,
@@ -52,7 +51,7 @@ const Addcategory = () => {
         setTimeout(() => {
           navigate("/admin/list-category");
           // dispatch(resetState());
-        },[1000])
+        },1000)
       } else {
          dispatch(newProdCategory(values));
       }
