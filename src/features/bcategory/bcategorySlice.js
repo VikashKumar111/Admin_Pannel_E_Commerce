@@ -24,10 +24,10 @@ export const newBlogCategory = createAsyncThunk(
 );
 
 export const getABlogCategory = createAsyncThunk(
-  "bogCategory/get-category",
-  async (blogData, thunkAPI) => {
+  "blogCategory/get-category",
+  async (id, thunkAPI) => {
     try {
-      return await bCategoryService.getABlogCategory(blogData);
+      return await bCategoryService.getBlogCategory(id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

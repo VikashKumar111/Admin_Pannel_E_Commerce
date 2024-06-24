@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { newBlogCategory, resetState } from "../features/bcategory/bcategorySlice";
+import { getABlogCategory, newBlogCategory, resetState } from "../features/bcategory/bcategorySlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Category is Required"),
@@ -13,18 +14,27 @@ let schema = Yup.object().shape({
 
 const Addblogcat = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const getBlogCatId = location.pathname.split("/")[3];
   // const navigate = useNavigate();
 
   const newBlogCat = useSelector((state) => state.bCategory);
-  const { isSuccess, isError, isLoading, createdBlogCategory } = newBlogCat;
+  const { isSuccess, isError, isLoading, createdBlogCategory, blogCategoryName } = newBlogCat;
     
 
-   
+  useEffect(() => {
+    if (getBlogCatId !== undefined) {
+      dispatch(getABlogCategory(getBlogCatId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [getBlogCatId]);
     
     
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: "",
+      title: blogCategoryName || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
