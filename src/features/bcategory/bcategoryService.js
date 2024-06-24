@@ -13,7 +13,8 @@ const createBlogCategory = async (bcat) => {
 };
 
 const updateBlogCatgeory = async (blogCategory) => {
-  const response = await axios.put(`${base_url}blogcategory/${blogCategory.id}`,
+  const response = await axios.put(
+    `${base_url}blogcategory/${blogCategory.id}`,
     { title: blogCategory.blogCategoryData.title },
     config
   );
@@ -23,13 +24,18 @@ const updateBlogCatgeory = async (blogCategory) => {
 const getBlogCategory = async (id) => {
   const response = await axios.get(`${base_url}blogcategory/${id}`, config);
   return response.data;
-}
+};
+
+const deleteBlogCategory = async (id) => {
+  const response = await axios.delete(`${base_url}blogcategory/${id}`, config);
+  return response.data;
+};
 const bCategoryService = {
   getBlogCategories,
   createBlogCategory,
   getBlogCategory,
   updateBlogCatgeory,
+  deleteBlogCategory,
 };
-
 
 export default bCategoryService;

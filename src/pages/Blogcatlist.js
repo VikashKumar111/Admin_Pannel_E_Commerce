@@ -20,12 +20,14 @@ const columns = [
 
 const Blogcatlist = () => {
   const [open, setOpen] = useState(false);
+  const [blogCategoryId, setBlogCategoryId] = useState("");
   const dispatch = useDispatch();
 
 
 
-  const showModal = () => {
+  const showModal = (id) => {
     setOpen(true);
+    setBlogCategoryId(id);
   }
 
   
@@ -48,7 +50,7 @@ const Blogcatlist = () => {
           <Link className="fs-3 text-danger" to={`/admin/blog-category/${bCatState[i]._id}`}>
             <BiEdit />
           </Link>
-          <button onClick={()=>showModal()} className="ms-3 fs-3 text-danger bg-transparent border-0" to="/">
+          <button onClick={()=>showModal(bCatState[i]._id)} className="ms-3 fs-3 text-danger bg-transparent border-0" to="/">
             <AiFillDelete />
           </button>
         </>
@@ -56,6 +58,15 @@ const Blogcatlist = () => {
     });
   }
 
+
+  const deleteBlogCategory = (id) => {
+    dispatch(deleteABlogCategory(id));
+
+    setTimeout(() => {
+      setOpen(false);
+      dispatch(getbCategories());
+    })
+  }
   return (
     <div>
       <h3 className="mb-4 title">Blog Categories</h3>
@@ -65,7 +76,7 @@ const Blogcatlist = () => {
       <CustomModal 
         hideModal={hideModal}
         open={open}
-        // performAction={() => deleteBlogCategory(blogCategoryId)}
+        performAction={() => deleteBlogCategory(blogCategoryId)}
         title="Are You Sure You Want To Delete This Blog Category?"
       />
     </div>

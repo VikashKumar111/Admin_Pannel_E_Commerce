@@ -45,6 +45,16 @@ export const getABlogCategory = createAsyncThunk(
   }
 )
 
+export const deleteABlogCategory = createAsyncThunk(
+  "blogCategory/delete-category",
+  async (id, thunkAPI) => {
+    try {
+      return await bCategoryService.deleteBlogCategory(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const resetState = createAction("Reset_all");
 
@@ -118,6 +128,21 @@ const bcategorySlice = createSlice({
         state.updatedBlogCategory = action.payload;
       })
       .addCase(updateABlogCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(deleteABlogCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteABlogCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedBlogCategory = action.payload;
+      })
+      .addCase(deleteABlogCategory.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
