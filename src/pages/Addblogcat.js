@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import CustomInput from "../components/Custominput";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { getABlogCategory, newBlogCategory, resetState } from "../features/bcategory/bcategorySlice";
+import { getABlogCategory, newBlogCategory, resetState, updateABlogCategory } from "../features/bcategory/bcategorySlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -19,7 +19,7 @@ const Addblogcat = () => {
   // const navigate = useNavigate();
 
   const newBlogCat = useSelector((state) => state.bCategory);
-  const { isSuccess, isError, isLoading, createdBlogCategory, blogCategoryName } = newBlogCat;
+  const { isSuccess, isError, isLoading, createdBlogCategory, blogCategoryName ,updatedBlogCategory} = newBlogCat;
     
 
   useEffect(() => {
@@ -60,6 +60,11 @@ const Addblogcat = () => {
         //    dispatch(resetState());
         // }, 3000);
       }
+      
+      if (isSuccess && updatedBlogCategory) {
+        toast.success("Blog Category Updated Successfully!");
+      }
+
       if (isError) {
         toast.error("Something Went Wrong!");
       }
@@ -67,7 +72,7 @@ const Addblogcat = () => {
 
   return (
     <div>
-      <h3 className="mb-4 title">Add Blog Category</h3>
+      <h3 className="mb-4 title">{getBlogCatId !== undefined ? "Edit" : "Add"} Blog Category</h3>
       <div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
@@ -86,7 +91,7 @@ const Addblogcat = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            Add Blog Category
+            {getBlogCatId !== undefined ? "Edit" : "Add"} Blog Category
           </button>
         </form>
       </div>
