@@ -23,6 +23,18 @@ export const newBlogCategory = createAsyncThunk(
   }
 );
 
+export const getABlogCategory = createAsyncThunk(
+  "bogCategory/get-category",
+  async (blogData, thunkAPI) => {
+    try {
+      return await bCategoryService.getABlogCategory(blogData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+)
+
+
 export const resetState = createAction("Reset_all");
 
 

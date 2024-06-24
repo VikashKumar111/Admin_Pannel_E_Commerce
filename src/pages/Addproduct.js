@@ -409,6 +409,9 @@ const Addproduct = () => {
   const [updateColor, setUpdateColor] = useState(color);
   const [updateImages, setUpdateImages] = useState(newProduct.images);
 
+  console.log(newProduct.images);
+  console.log(updateImages);
+
   // console.log(color);
   // console.log(updateColor);
 
@@ -508,15 +511,22 @@ const Addproduct = () => {
 
   const handleUpdateColor = (selectedColors) => {
     setUpdateColor(selectedColors);
-    formik.setFieldValue("color", updateColor);
+    formik.setFieldValue("color", selectedColors);
   };
 
   const handleImages = (acceptedFiles) => {
     dispatch(uploadImg(acceptedFiles)).then((response) => {
       formik.setFieldValue("images", response.payload);
+    });
+  };
+  
+   const handleUpdateImages = (acceptedFiles) => {
+    dispatch(uploadImg(acceptedFiles)).then((response) => {
+      formik.setFieldValue("images", response.payload);
       setUpdateImages(response.payload);
     });
   };
+
 
   const notification = () => {
     if (isSuccess && createdProduct) {
@@ -662,7 +672,7 @@ const Addproduct = () => {
         <div className="error">
           {formik.touched.quantity && formik.errors.quantity}
         </div>
-        <div className="bg-white border-1 p-5 text-center">
+        {/* <div className="bg-white border-1 p-5 text-center">
           <Dropzone onDrop={handleImages}>
             {({ getRootProps, getInputProps }) => (
               <section>
@@ -673,7 +683,7 @@ const Addproduct = () => {
               </section>
             )}
           </Dropzone>
-        </div>
+        </div> */}
         {/* <div className="showimages d-flex flex-wrap gap-3">
           {img.map((i, j) => (
             <div key={j} className="position-relative">
@@ -688,35 +698,67 @@ const Addproduct = () => {
           ))}
         </div> */}
         {updateImages !== undefined ? (
-          <div className="showimages d-flex flex-wrap gap-3">
-            {updateImages.map((i, j) => (
-              <div key={j} className="position-relative">
-                <button
-                  type="button"
-                  onClick={() => dispatch(dltImg(i.public_id))}
-                  className="btn-close position-absolute"
-                  style={{ top: "10px", right: "10px" }}
-                ></button>
-                console.log("updateimg is running")
-                <img src={i.url} alt="" width={200} height={200} />
-              </div>
-            ))}
-          </div>
+          <>
+            <div className="bg-white border-1 p-5 text-center">
+              <Dropzone onDrop={handleImages}>
+                {({ getRootProps, getInputProps }) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <p>
+                        Drag 'n' drop some files here, or click to select files
+                      </p>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+            </div>
+            <div className="showimages d-flex flex-wrap gap-3">
+              {updateImages.map((i, j) => (
+                <div key={j} className="position-relative">
+                  <button
+                    type="button"
+                    onClick={() => dispatch(dltImg(i.public_id))}
+                    className="btn-close position-absolute"
+                    style={{ top: "10px", right: "10px" }}
+                  ></button>
+                  console.log("updateimg is running")
+                  <img src={i.url} alt="" width={200} height={200} />
+                </div>
+              ))}
+            </div>
+          </>
         ) : (
-          <div className="showimages d-flex flex-wrap gap-3">
-            {img.map((i, j) => (
-              <div key={j} className="position-relative">
-                <button
-                  type="button"
-                  onClick={() => dispatch(dltImg(i.public_id))}
-                  className="btn-close position-absolute"
-                  style={{ top: "10px", right: "10px" }}
-                ></button>
-                console.log("img is running")
-                <img src={i.url} alt="" width={200} height={200} />
-              </div>
-            ))}
-          </div>
+          <>
+            <div className="bg-white border-1 p-5 text-center">
+              <Dropzone onDrop={handleUpdateImages}>
+                {({ getRootProps, getInputProps }) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <p>
+                        Drag 'n' drop some files here, or click to select files
+                      </p>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+            </div>
+            <div className="showimages d-flex flex-wrap gap-3">
+              {img.map((i, j) => (
+                <div key={j} className="position-relative">
+                  <button
+                    type="button"
+                    onClick={() => dispatch(dltImg(i.public_id))}
+                    className="btn-close position-absolute"
+                    style={{ top: "10px", right: "10px" }}
+                  ></button>
+                  console.log("img is running")
+                  <img src={i.url} alt="" width={200} height={200} />
+                </div>
+              ))}
+            </div>
+          </>
         )}
         <button
           className="btn btn-success border-0 rounded-3 my-5"
