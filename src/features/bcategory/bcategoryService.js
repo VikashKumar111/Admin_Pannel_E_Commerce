@@ -12,6 +12,14 @@ const createBlogCategory = async (bcat) => {
   return response.data;
 };
 
+const updateBlogCatgeory = async (blogCategory) => {
+  const response = await axios.put(`${base_url}blogcategory/${blogCategory.id}`,
+    { title: blogCategory.blogCategoryData.title },
+    config
+  );
+  return response.data;
+};
+
 const getBlogCategory = async (id) => {
   const response = await axios.get(`${base_url}blogcategory/${id}`, config);
   return response.data;
@@ -20,6 +28,7 @@ const bCategoryService = {
   getBlogCategories,
   createBlogCategory,
   getBlogCategory,
+  updateBlogCatgeory,
 };
 
 

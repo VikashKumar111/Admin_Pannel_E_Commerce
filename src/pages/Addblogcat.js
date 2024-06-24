@@ -39,7 +39,14 @@ const Addblogcat = () => {
     validationSchema: schema,
     onSubmit: (values) => {
       // console.log("Submitting form with values:", values);
-      dispatch(newBlogCategory(values));
+      if (getBlogCatId !== undefined) {
+        const data = { id: getBlogCatId, blogCategoryData: values };
+        dispatch(updateABlogCategory(data));
+      } else {
+         dispatch(newBlogCategory(values));
+      }
+      
+     
       formik.resetForm();
       notification();
     },
