@@ -11,6 +11,7 @@ import { dltImg, uploadImg } from "../features/upload/uploadSlice";
 import { getbCategories } from "../features/bcategory/bcategorySlice";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 let schema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -20,7 +21,10 @@ let schema = Yup.object().shape({
 
 const Addblog = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   // const navigate = useNavigate();
+
+  const blogId = location.pathname.split("/")[3];
 
   useEffect(() => {
     dispatch(getbCategories());
@@ -46,6 +50,14 @@ const Addblog = () => {
       url: i.url,
     });
   });
+
+   useEffect(() => {
+    if (blogId) {
+      // dispatch(getAProduct(blogId));
+    } else {
+      dispatch(resetState());
+    }
+  }, [dispatch, blogId]);
 
   useEffect(() => {
     formik.values.images = img;

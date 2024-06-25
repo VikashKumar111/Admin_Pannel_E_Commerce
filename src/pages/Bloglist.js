@@ -40,7 +40,7 @@ const Bloglist = () => {
       category: blogState[i].category,
       action: (
         <>
-          <Link className="fs-3 text-danger" to="/">
+          <Link className="fs-3 text-danger" to={`/admin/blog/${blogState[i]._id}`}>
             <BiEdit />
           </Link>
           <Link className="ms-3 fs-3 text-danger" to="/">
