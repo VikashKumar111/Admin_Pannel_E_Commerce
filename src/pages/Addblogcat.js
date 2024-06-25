@@ -42,7 +42,7 @@ const Addblogcat = () => {
       if (getBlogCatId !== undefined) {
         const data = { id: getBlogCatId, blogCategoryData: values };
         dispatch(updateABlogCategory(data));
-        notification();
+        toast.success("Blog Category Updated Successfully!");
         setTimeout(() => {
           navigate("/admin/blog-category-list")
         }, 1000)
@@ -54,6 +54,7 @@ const Addblogcat = () => {
       
       formik.resetForm();
       notification();
+      
     },
   });
 
