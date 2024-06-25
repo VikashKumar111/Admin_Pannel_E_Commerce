@@ -498,7 +498,7 @@ const Addproduct = () => {
 
         setColorr([]);
       }
-
+      
       formik.resetForm();
       notification();
     },
@@ -609,6 +609,7 @@ const Addproduct = () => {
             </option>
           ))}
         </select>
+
         <div className="error">
           {formik.touched.category && formik.errors.category}
         </div>

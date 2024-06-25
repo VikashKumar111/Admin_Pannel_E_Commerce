@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Dropzone from "react-dropzone";
 import { useDispatch, useSelector } from "react-redux";
-import { createBlogs, resetState } from "../features/blogs/blogSlice";
+import { createBlogs, getABlog, resetState } from "../features/blogs/blogSlice";
 import { dltImg, uploadImg } from "../features/upload/uploadSlice";
 import { getbCategories } from "../features/bcategory/bcategorySlice";
 // import { useNavigate } from "react-router-dom";
@@ -53,7 +53,7 @@ const Addblog = () => {
 
    useEffect(() => {
     if (blogId) {
-      // dispatch(getAProduct(blogId));
+      dispatch(getABlog(blogId));
     } else {
       dispatch(resetState());
     }
@@ -64,11 +64,12 @@ const Addblog = () => {
   }, [img]);
 
   const formik = useFormik({
+    enableReinitialize:true,
     initialValues: {
-      title: "",
-      description: "",
-      category: "",
-      images: "",
+      title: newBlog.blogName || "",
+      description: newBlog.description || "",
+      category: newBlog.category || "",
+      images: newBlog?.images || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
