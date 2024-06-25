@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteABlogCategory, getbCategories } from "../features/bcategory/bcategorySlice";
+import { deleteABlogCategory, getbCategories, resetState } from "../features/bcategory/bcategorySlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -37,7 +37,9 @@ const Blogcatlist = () => {
 
   useEffect(() => {
     dispatch(getbCategories());
+    dispatch(resetState());
   }, []);
+  
   const bCatState = useSelector((state) => state.bCategory.bCategories);
 
   const data1 = [];
@@ -65,7 +67,7 @@ const Blogcatlist = () => {
     setTimeout(() => {
       setOpen(false);
       dispatch(getbCategories());
-    },400)
+    },500)
   }
   return (
     <div>

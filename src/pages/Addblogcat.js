@@ -42,14 +42,16 @@ const Addblogcat = () => {
       if (getBlogCatId !== undefined) {
         const data = { id: getBlogCatId, blogCategoryData: values };
         dispatch(updateABlogCategory(data));
+        notification();
         setTimeout(() => {
           navigate("/admin/blog-category-list")
-        },1000)
+        }, 1000)
+        
       } else {
          dispatch(newBlogCategory(values));
       }
       
-     
+      
       formik.resetForm();
       notification();
     },
@@ -58,10 +60,6 @@ const Addblogcat = () => {
     const notification = () => {
       if (isSuccess && createdBlogCategory) {
         toast.success("Blog Category Added Successfully!");
-        setTimeout(() => {
-         
-           dispatch(resetState());
-        }, 500);
       }
       
       if (isSuccess && updatedBlogCategory) {
