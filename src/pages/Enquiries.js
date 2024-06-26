@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getEnquiry } from "../features/enquiry/enquirySlice";
+import { deleteAEnquiry, getEnquiry } from "../features/enquiry/enquirySlice";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
