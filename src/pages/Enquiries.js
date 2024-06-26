@@ -54,9 +54,9 @@ const Enquiries = () => {
       ),
       action: (
         <>
-          <Link className="ms-3 fs-3 text-danger" to="/">
+          <button className="ms-3 fs-3 text-danger" to="/">
             <AiFillDelete />
-          </Link>
+          </button>
         </>
       ),
     });

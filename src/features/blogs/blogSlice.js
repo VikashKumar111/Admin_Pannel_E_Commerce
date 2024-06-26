@@ -48,6 +48,17 @@ export const getABlog = createAsyncThunk(
   }
 );
 
+export const deleteABlog = createAsyncThunk(
+  "blog/delete-blog",
+  async (id, thunkAPI) => {
+    try {
+      return await blogService.deleteBlog(id);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const resetState = createAction("Reset_all");
 
 const initialState = {
@@ -102,9 +113,9 @@ export const blogSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.blogName = action.payload.title;
-        state.category = action.payload.category;
-        state.description = action.payload.description;
-        state.images = action.payload.images;
+        state.blogDesc = action.payload.description;
+        state.blogCategory = action.payload.category;
+        state.blogImages = action.payload.images;
         console.log(action.payload);
       })
       .addCase(getABlog.rejected, (state, action) => {
@@ -123,6 +134,21 @@ export const blogSlice = createSlice({
         state.updatedBlog = action.payload;
       })
       .addCase(updateABlog.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(deleteABlog.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteABlog.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.deletedBlog = action.payload;
+      })
+      .addCase(deleteABlog.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
