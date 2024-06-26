@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEnquiry } from "../features/enquiry/enquirySlice";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 
 const columns = [
   {
@@ -33,6 +34,15 @@ const columns = [
 ];
 
 const Enquiries = () => {
+  const [open, setOpen] = useSatate(false);
+
+  const showModal = () => {
+    setOpen(true);
+  }
+
+  const hideModal = () => {
+    setOpen(false);
+  }
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getEnquiry());
@@ -54,7 +64,7 @@ const Enquiries = () => {
       ),
       action: (
         <>
-          <button className="ms-3 fs-3 text-danger" to="/">
+          <button onClick={()=>showModal()} className="ms-3 fs-3 text-danger" to="/">
             <AiFillDelete />
           </button>
         </>
@@ -68,6 +78,11 @@ const Enquiries = () => {
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
+      <CustomModal
+        open={open}
+        hideModal={hideModal}
+        title="Are You sure You want to delete this Enquiry?"
+      />
     </div>
   );
 };
