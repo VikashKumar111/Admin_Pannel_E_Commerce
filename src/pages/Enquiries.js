@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getEnquiry } from "../features/enquiry/enquirySlice";
@@ -34,19 +34,26 @@ const columns = [
 ];
 
 const Enquiries = () => {
-  const [open, setOpen] = useSatate(false);
+  const [open, setOpen] = useState(false);
+  const [enqId, setEnqId] = useState("");
+    const dispatch = useDispatch();
 
-  const showModal = () => {
+  const showModal = (id) => {
     setOpen(true);
-  }
+    setEnqId(id);
+  };
+  
+  console.log(enqId);
 
   const hideModal = () => {
     setOpen(false);
-  }
-  const dispatch = useDispatch();
+  };
+
+
   useEffect(() => {
     dispatch(getEnquiry());
   }, []);
+
   const enqState = useSelector((state) => state.enquiry.enquiry);
   const data1 = [];
   for (let i = 0; i < enqState.length; i++) {
@@ -64,12 +71,21 @@ const Enquiries = () => {
       ),
       action: (
         <>
-          <button onClick={()=>showModal()} className="ms-3 fs-3 text-danger" to="/">
+          <button onClick={()=>showModal(enqState[i]._id)} className="ms-3 fs-3 text-danger bg-transparent border-0" to="/">
             <AiFillDelete />
           </button>
         </>
       ),
     });
+  }
+  
+  const deleteEnquiry = (id) => {
+    dispatch(deleteAEnquiry(id));
+
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(getEnquiry());
+    }, 400);
   }
 
   return (
@@ -81,6 +97,9 @@ const Enquiries = () => {
       <CustomModal
         open={open}
         hideModal={hideModal}
+        performAction={() => {
+          deleteEnquiry(enqId);
+        }}
         title="Are You sure You want to delete this Enquiry?"
       />
     </div>
