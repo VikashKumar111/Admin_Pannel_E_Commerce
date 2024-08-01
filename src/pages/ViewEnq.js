@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getAEnquiry } from "../features/enquiry/enquirySlice";
+import { BiArrowBack } from "react-icons/bi";
 
 const ViewEnq = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const getEnqId = location.pathname.split("/")[3];
   console.log(getEnqId);
@@ -15,9 +17,17 @@ const ViewEnq = () => {
     dispatch(getAEnquiry(getEnqId));
   }, [getEnqId]);
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div>
-      <h3 className="mb-4 title">View Enquiry</h3>
+      <div className="d-flex justify-content-between align-items-center">
+        <h3 className="mb-4 title">View Enquiry</h3>
+        <button className="bg-transparent border-0 fs-6 mb-0 d-flex align-items-center gap-1 " onClick={goBack}><BiArrowBack className="fs-5"/> Go Back</button>
+      </div>
+
       <div className="mt-5 bg-white p-4 d-flex gap-3 flex-column rounded-3">
         <div className="d-flex align-items-center gap-3">
           <h6 className="mb-0">Name:</h6>
