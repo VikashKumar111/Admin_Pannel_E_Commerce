@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAEnquiry, getEnquiry } from "../features/enquiry/enquirySlice";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete , AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
 
@@ -23,7 +23,7 @@ const columns = [
     title: "Mobile",
     dataIndex: "mobile",
   },
-   {
+  {
     title: "Status",
     dataIndex: "status",
   },
@@ -36,19 +36,18 @@ const columns = [
 const Enquiries = () => {
   const [open, setOpen] = useState(false);
   const [enqId, setEnqId] = useState("");
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const showModal = (id) => {
     setOpen(true);
     setEnqId(id);
   };
-  
+
   console.log(enqId);
 
   const hideModal = () => {
     setOpen(false);
   };
-
 
   useEffect(() => {
     dispatch(getEnquiry());
@@ -58,7 +57,7 @@ const Enquiries = () => {
   const data1 = [];
   for (let i = 0; i < enqState.length; i++) {
     data1.push({
-      key: i+1,
+      key: i + 1,
       name: enqState[i].name,
       email: enqState[i].email,
       mobile: enqState[i].mobile,
@@ -71,14 +70,23 @@ const Enquiries = () => {
       ),
       action: (
         <>
-          <button onClick={()=>showModal(enqState[i]._id)} className="ms-3 fs-3 text-danger bg-transparent border-0" to="/">
+          <Link className="ms-3 fs-3 text-danger"
+            to={`/admin/enquiries/${enqState[i]._id}`}
+          >
+            <AiOutlineEye />
+          </Link>
+          <button
+            onClick={() => showModal(enqState[i]._id)}
+            className="ms-3 fs-3 text-danger bg-transparent border-0"
+            to="/"
+          >
             <AiFillDelete />
           </button>
         </>
       ),
     });
   }
-  
+
   const deleteEnquiry = (id) => {
     dispatch(deleteAEnquiry(id));
 
@@ -86,7 +94,7 @@ const Enquiries = () => {
     setTimeout(() => {
       dispatch(getEnquiry());
     }, 400);
-  }
+  };
 
   return (
     <div>
