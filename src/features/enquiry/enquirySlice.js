@@ -5,7 +5,7 @@ export const getEnquiry = createAsyncThunk(
   "enquiry/get-enquiry",
   async (thunkAPI) => {
     try {
-      return await enquiryService.getEnquiry();
+      return await enquiryService.getEnquiries();
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -22,6 +22,8 @@ export const deleteAEnquiry = createAsyncThunk(
     }
   }
 );
+
+
 
 export const resetState = createAction("Reset_all");
 

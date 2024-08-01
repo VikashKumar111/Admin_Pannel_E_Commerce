@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom";
 
 const ViewEnq = () => {
     const location = useLocation();
-    console.log(location);
+    const getEnqId = location.pathname.split("/")[3];
+    console.log(getEnqId);
     return (
         <div>
             <h3 className="mb-4 title">View Enquiry</h3>
