@@ -80,13 +80,11 @@ const Enquiries = () => {
   }
   
   const deleteEnquiry = (id) => {
-    console.log("i am running");
     dispatch(deleteAEnquiry(id));
 
     setOpen(false);
     setTimeout(() => {
       dispatch(getEnquiry());
-      console.log("i am also running");
     }, 400);
   }
 
