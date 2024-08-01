@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import enquiryService from "./enquiryService";
 
 export const getEnquiry = createAsyncThunk(
-  "enquiry/get-enquiry",
+  "enquiry/get-enquiries",
   async (thunkAPI) => {
     try {
       return await enquiryService.getEnquiries();
@@ -84,12 +84,16 @@ export const enquirySlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getAEnquiry.fulfilled, (state, action) => {
-        state.isLoading = false
+        state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.enqName = action.payload;
+        state.enqName = action.payload.name;
+        state.enqMobile = action.payload.mobile;
+        state.enqEmail = action.payload.email;
+        state.enqComment = action.payload.comment;
+        state.enqStatus = action.payload.status;
       })
-      .addCase(getAEnquiry.rejected, (state,action) => {
+      .addCase(getAEnquiry.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
