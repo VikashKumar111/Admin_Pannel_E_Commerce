@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getAEnquiry } from "../features/enquiry/enquirySlice";
+import { getAEnquiry, resetState, updateAEnquiry } from "../features/enquiry/enquirySlice";
 import { BiArrowBack } from "react-icons/bi";
 
 const ViewEnq = () => {
@@ -20,6 +20,15 @@ const ViewEnq = () => {
   const goBack = () => {
     navigate(-1);
   };
+
+  const setEnquiryStatus = (e,i) => {
+    const data = { id: i, enqData: e };
+    dispatch(updateAEnquiry(data));
+    setTimeout(() => {
+      dispatch(resetState());
+      dispatch(getAEnquiry(getEnqId));
+    },200)
+  }
 
   return (
     <div>
@@ -61,6 +70,7 @@ const ViewEnq = () => {
               defaultValue={enqStatus ? enqStatus : "Submitted"}
               id=""
               className="form-control form-select"
+              onChange={(e)=>setEnquiryStatus(e.target.value,getEnqId)}
             >
               <option value="default" selected>
                 Select Status
