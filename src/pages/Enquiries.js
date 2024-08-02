@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAEnquiry, getEnquiry } from "../features/enquiry/enquirySlice";
+import { deleteAEnquiry, getEnquiry, updateAEnquiry } from "../features/enquiry/enquirySlice";
 import { AiFillDelete , AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
@@ -63,9 +63,21 @@ const Enquiries = () => {
       mobile: enqState[i].mobile,
       status: (
         <>
-          <select name="" className="form-control form-select" id="">
-            <option value="">Set Status</option>
-          </select>
+           <select
+              name=""
+              defaultValue={enqState[i].status ? enqState[i].status : "Submitted"}
+              id=""
+            className="form-control form-select"
+            onChange={(e)=>setEnquiryStatus(e.target.value, enqState[i]._id)}
+            >
+              <option value="default" >
+                Select Status
+              </option>
+              <option value="Submitted">Submitted</option>
+              <option value="Contacted">Contacted</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
         </>
       ),
       action: (
@@ -86,6 +98,12 @@ const Enquiries = () => {
       ),
     });
   }
+
+  const setEnquiryStatus = (e, i) => {
+    console.log(e, i);
+    const data = { id: i, enqData: e }
+    dispatch(updateAEnquiry(data));
+  };
 
   const deleteEnquiry = (id) => {
     dispatch(deleteAEnquiry(id));
