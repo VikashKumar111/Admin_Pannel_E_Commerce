@@ -43,7 +43,7 @@ const getOrders = async () => {
 
 const getOrder = async (id) => {
   try {
-    const response = await axios.get(`${base_url}user/getorderbyuser/${id}`, config);
+    const response = await axios.post(`${base_url}user/getorderbyuser/${id}`, config);
     return response.data;
   } catch (error) {
     console.error(

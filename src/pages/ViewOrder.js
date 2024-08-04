@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders } from "../features/auth/authSlice";
+import { getOrderByUser } from "../features/auth/authSlice";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const columns = [
   {
@@ -34,9 +34,11 @@ const columns = [
 ];
 
 const ViewOrder = () => {
+  const location = useLocation();
+  const userId = location.pathname.split("/")[3];
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getOrders());
+    dispatch(getOrderByUser(userId));
   }, []);
   const orderState = useSelector((state) => state.auth.orders);
   // console.log(orderState);
@@ -45,7 +47,11 @@ const ViewOrder = () => {
     data1.push({
       key: i + 1,
       name: orderState[i].orderby.firstname,
-      product: <Link to={`/admin/orders/${orderState[i].orderby._id}`}>View User Order</Link>,
+      product: (
+        <Link to={`/admin/orders/${orderState[i].orderby._id}`}>
+          View User Order
+        </Link>
+      ),
       amount: orderState[i].paymentIntent.amount,
       date: new Date(orderState[i].createdAt).toDateString(),
       action: (
