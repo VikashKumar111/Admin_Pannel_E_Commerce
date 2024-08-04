@@ -1,5 +1,6 @@
 import axios from "axios";
 import { base_url } from "../../utils/base_url";
+import { GrConfigure } from "react-icons/gr";
 
 const getTokenfromLocalStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
@@ -40,9 +41,23 @@ const getOrders = async () => {
 
 // }
 
+const getOrder = async (id) => {
+  try {
+    const response = await axios.get(`${base_url}user/getorderbyuser/${id}`, config);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Get order error:",
+      error.response ? error.response.data : error.message
+    );
+    throw error;
+  }
+}
+
 const authService = {
   login,
   getOrders,
+  getOrder,
 };
 
 export default authService;
