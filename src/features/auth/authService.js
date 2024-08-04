@@ -1,6 +1,5 @@
 import axios from "axios";
 import { base_url } from "../../utils/base_url";
-import { GrConfigure } from "react-icons/gr";
 
 const getTokenfromLocalStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
@@ -24,7 +23,9 @@ const login = async (userData) => {
 const getOrders = async () => {
   try {
     const response = await axios.get(`${base_url}user/getallorders`, config);
+    console.log(response.data);
     return response.data;
+   
   } catch (error) {
     console.error(
       "Get orders error:",
@@ -43,7 +44,11 @@ const getOrders = async () => {
 
 const getOrder = async (id) => {
   try {
-    const response = await axios.post(`${base_url}user/getorderbyuser/${id}`, config);
+    const response = await axios.get(
+      `${base_url}user/getorderbyuser/${id}`,
+      config
+    );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(
@@ -52,7 +57,7 @@ const getOrder = async (id) => {
     );
     throw error;
   }
-}
+};
 
 const authService = {
   login,

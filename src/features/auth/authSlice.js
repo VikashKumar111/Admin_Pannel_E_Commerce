@@ -40,7 +40,8 @@ export const getOrders = createAsyncThunk(
 
 export const getOrderByUser = createAsyncThunk(
   "order/get-order",
-  async (id,thunkAPI) => {
+  async (id, thunkAPI) => {
+    console.log(id);
     try {
       return await authService.getOrder(id);
     } catch (error) {
@@ -103,6 +104,7 @@ export const authSlice = createSlice({
         state.isError=false;
         state.isSuccess = true;
         state.orderbyuser = action.payload;
+        console.log(action.payload);
         state.message = "success";
       })
       .addCase(getOrderByUser.rejected, (state, action) => {
