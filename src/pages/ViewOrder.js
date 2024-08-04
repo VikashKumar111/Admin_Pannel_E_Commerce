@@ -33,7 +33,7 @@ const columns = [
   },
 ];
 
-const Orders = () => {
+const ViewOrder = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrders());
@@ -45,7 +45,7 @@ const Orders = () => {
     data1.push({
       key: i + 1,
       name: orderState[i].orderby.firstname,
-      product: <Link to={`/admin/orders/${orderState[i].orderby._id}`}>View Orders</Link>,
+      product: <Link to={`/admin/orders/${orderState[i].orderby._id}`}>View User Order</Link>,
       amount: orderState[i].paymentIntent.amount,
       date: new Date(orderState[i].createdAt).toDateString(),
       action: (
@@ -71,4 +71,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default ViewOrder;

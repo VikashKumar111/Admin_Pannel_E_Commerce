@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAEnquiry, getEnquiry, updateAEnquiry } from "../features/enquiry/enquirySlice";
+import { deleteAEnquiry, getEnquiry, resetState, updateAEnquiry } from "../features/enquiry/enquirySlice";
 import { AiFillDelete , AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
@@ -103,6 +103,10 @@ const Enquiries = () => {
     console.log(e, i);
     const data = { id: i, enqData: e }
     dispatch(updateAEnquiry(data));
+    setTimeout(() => {
+      dispatch(resetState());
+      dispatch(getEnquiry());
+    }, 100);
   };
 
   const deleteEnquiry = (id) => {
