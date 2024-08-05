@@ -48,32 +48,30 @@ const ViewOrder = () => {
   useEffect(() => {
     dispatch(getOrderByUser(userId));
   }, []);
-  const orderState = useSelector((state) => state.auth.orderbyuser);
+  const orderState = useSelector((state) => state.auth);
   console.log(orderState);
-  // const data1 = [];
-  // for (let i = 0; i < orderState[i]; i++) {
-  //   data1.push({
-  //     key: i + 1,
-  //     name: orderState[i],
-  //     product: (
-  //       <Link to={`/admin/orders/${orderState[i]}`}>
-  //         View User Order
-  //       </Link>
-  //     ),
-  //     amount: orderState[i],
-  //     date: new Date(orderState[i]).toDateString(),
-  //     action: (
-  //       <>
-  //         <Link className="fs-3 text-danger" to="/">
-  //           <BiEdit />
-  //         </Link>
-  //         <Link className="ms-3 fs-3 text-danger" to="/">
-  //           <AiFillDelete />
-  //         </Link>
-  //       </>
-  //     ),
-  //   });
-  // }
+  const data1 = [];
+  for (let i = 0; i < orderState[i]; i++) {
+    data1.push({
+      key: i + 1,
+      name: orderState[i].product.title,
+      brand: orderState[i].product.brand,
+      count: orderState[i].count,
+      amount: orderState[i].product.price,
+      color: orderState[i].product.color,
+      date: orderState[i].product.createdAt,
+      action: (
+        <>
+          <Link className="fs-3 text-danger" to="/">
+            <BiEdit />
+          </Link>
+          <Link className="ms-3 fs-3 text-danger" to="/">
+            <AiFillDelete />
+          </Link>
+        </>
+      ),
+    });
+  }
 
   return (
     <div>
