@@ -12,12 +12,20 @@ const columns = [
     dataIndex: "key",
   },
   {
-    title: "Name",
+    title: "Product Name",
     dataIndex: "name",
   },
   {
-    title: "Product",
-    dataIndex: "product",
+    title: "Brand",
+    dataIndex: "brand",
+  },
+  {
+    title: "Count",
+    dataIndex: "count",
+  },
+  {
+    title: "Color",
+    dataIndex: "color",
   },
   {
     title: "Amount",
@@ -40,20 +48,20 @@ const ViewOrder = () => {
   useEffect(() => {
     dispatch(getOrderByUser(userId));
   }, [userId]);
-  const orderState = useSelector((state) => state.auth.orderbyuser.product);
+  const orderState = useSelector((state) => state.auth.orderbyuser);
   console.log(orderState);
   const data1 = [];
   for (let i = 0; i < orderState.length; i++) {
     data1.push({
       key: i + 1,
-      name: orderState[i].product,
+      name: orderState[i],
       product: (
-        <Link to={`/admin/orders/${orderState[i]._id}`}>
+        <Link to={`/admin/orders/${orderState[i]}`}>
           View User Order
         </Link>
       ),
-      amount: orderState[i].paymentIntent.amount,
-      date: new Date(orderState[i].createdAt).toDateString(),
+      amount: orderState[i],
+      date: new Date(orderState[i]).toDateString(),
       action: (
         <>
           <Link className="fs-3 text-danger" to="/">
