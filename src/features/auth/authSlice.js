@@ -56,7 +56,6 @@ export const getOrderByUser = createAsyncThunk(
 const initialState = {
   user: getUserfromLocalStorage,
   orders: [],
-  orderbyuser: null,
   isError: false,
   isLoading: false,
   isSuccess: false,

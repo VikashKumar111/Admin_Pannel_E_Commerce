@@ -42,22 +42,34 @@ const getOrders = async () => {
 
 // }
 
+// const getOrder = async (id) => {
+//   try {
+//     const response = await axios.post(
+//       `${base_url}user/getorderbyuser/${id}`,
+//       config
+//     );
+//     console.log(response);
+//     return response.data;
+//   } catch (error) {
+//     console.error(
+//       "Get order error:",
+//       error.response ? error.response.data : error.message
+//     );
+//     throw error;
+//   }
+// };
+
 const getOrder = async (id) => {
-  try {
-    const response = await axios.get(
-      `${base_url}user/getorderbyuser/${id}`,
-      config
-    );
-    console.log(response);
-    return response.data;
-  } catch (error) {
-    console.error(
-      "Get order error:",
-      error.response ? error.response.data : error.message
-    );
-    throw error;
-  }
+  const response = await axios.post(
+    `${base_url}user/getorderbyuser/${id}`,
+    "",
+    config
+  );
+
+  return response.data;
 };
+
+
 
 const authService = {
   login,

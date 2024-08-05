@@ -48,21 +48,47 @@ const ViewOrder = () => {
   useEffect(() => {
     dispatch(getOrderByUser(userId));
   }, []);
-  const orderState = useSelector((state) => state.auth);
+  // const orderState = useSelector((state) => state.auth.orderbyuser.products);
+  // console.log(orderState[0].color);
+  // const data1 = [];
+  // for (let i = 0; i < orderState[i]; i++) {
+  //   data1.push({
+  //     key: i + 1,
+  //     name: orderState[i].title,
+  //     brand: orderState[i].brand,
+  //     count: orderState[i].count,
+  //     amount: orderState[i].price,
+  //     color: orderState[i].color,
+  //     date: orderState[i].createdAt,
+  //     action: (
+  //       <>
+  //         <Link className="fs-3 text-danger" to="/">
+  //           <BiEdit />
+  //         </Link>
+  //         <Link className="ms-3 fs-3 text-danger" to="/">
+  //           <AiFillDelete />
+  //         </Link>
+  //       </>
+  //     ),
+  //   });
+  // }
+
+
+   const orderState = useSelector((state) => state.auth.orderbyuser?.products);
   console.log(orderState);
   const data1 = [];
-  for (let i = 0; i < orderState[i]; i++) {
+  for (let i = 0; i < orderState?.length; i++) {
     data1.push({
       key: i + 1,
       name: orderState[i].product.title,
       brand: orderState[i].product.brand,
       count: orderState[i].count,
       amount: orderState[i].product.price,
-      color: orderState[i].product.color,
+      // color: orderState[i].product.color,
       date: orderState[i].product.createdAt,
       action: (
         <>
-          <Link className="fs-3 text-danger" to="/">
+          <Link to="/" className=" fs-3 text-danger">
             <BiEdit />
           </Link>
           <Link className="ms-3 fs-3 text-danger" to="/">
@@ -73,11 +99,12 @@ const ViewOrder = () => {
     });
   }
 
+
   return (
     <div>
       <h3 className="mb-4 title">View Order</h3>
       <div>
-        {/* <Table columns={columns} dataSource={data1} /> */}
+        <Table columns={columns} dataSource={data1} />
       </div>
     </div>
   );
