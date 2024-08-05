@@ -40,15 +40,15 @@ const ViewOrder = () => {
   useEffect(() => {
     dispatch(getOrderByUser(userId));
   }, [userId]);
-  const orderState = useSelector((state) => state.auth.orders);
-  // console.log(orderState);
+  const orderState = useSelector((state) => state.auth.orderbyuser.product);
+  console.log(orderState);
   const data1 = [];
   for (let i = 0; i < orderState.length; i++) {
     data1.push({
       key: i + 1,
-      name: orderState[i].orderby.firstname,
+      name: orderState[i].product,
       product: (
-        <Link to={`/admin/orders/${orderState[i].orderby._id}`}>
+        <Link to={`/admin/orders/${orderState[i]._id}`}>
           View User Order
         </Link>
       ),
