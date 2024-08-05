@@ -39,7 +39,7 @@ const ViewOrder = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrderByUser(userId));
-  }, []);
+  }, [userId]);
   const orderState = useSelector((state) => state.auth.orders);
   // console.log(orderState);
   const data1 = [];

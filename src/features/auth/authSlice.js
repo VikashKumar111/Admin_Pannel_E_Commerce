@@ -43,7 +43,10 @@ export const getOrderByUser = createAsyncThunk(
   async (id, thunkAPI) => {
     console.log(id);
     try {
-      return await authService.getOrder(id);
+      // return await authService.getOrder(id);
+      const response = await authService.getOrder(id);
+      console.log('Response from getOrder:', response);
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -53,6 +56,7 @@ export const getOrderByUser = createAsyncThunk(
 const initialState = {
   user: getUserfromLocalStorage,
   orders: [],
+  orderbyuser: null,
   isError: false,
   isLoading: false,
   isSuccess: false,
