@@ -24,7 +24,6 @@ const login = async (userData) => {
 const getOrders = async () => {
   try {
     const response = await axios.get(`${base_url}user/getallorders`, configg);
-    console.log(response.data);
     return response.data;
    
   } catch (error) {
@@ -49,7 +48,7 @@ const getOrder = async (id) => {
       `${base_url}user/getorderbyuser/${id}`,
       config
     );
-    console.log(response.data);
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error(

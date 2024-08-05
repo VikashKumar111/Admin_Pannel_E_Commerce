@@ -47,39 +47,39 @@ const ViewOrder = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrderByUser(userId));
-  }, [userId]);
+  }, []);
   const orderState = useSelector((state) => state.auth.orderbyuser);
   console.log(orderState);
-  const data1 = [];
-  for (let i = 0; i < orderState.length; i++) {
-    data1.push({
-      key: i + 1,
-      name: orderState[i],
-      product: (
-        <Link to={`/admin/orders/${orderState[i]}`}>
-          View User Order
-        </Link>
-      ),
-      amount: orderState[i],
-      date: new Date(orderState[i]).toDateString(),
-      action: (
-        <>
-          <Link className="fs-3 text-danger" to="/">
-            <BiEdit />
-          </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
-            <AiFillDelete />
-          </Link>
-        </>
-      ),
-    });
-  }
+  // const data1 = [];
+  // for (let i = 0; i < orderState[i]; i++) {
+  //   data1.push({
+  //     key: i + 1,
+  //     name: orderState[i],
+  //     product: (
+  //       <Link to={`/admin/orders/${orderState[i]}`}>
+  //         View User Order
+  //       </Link>
+  //     ),
+  //     amount: orderState[i],
+  //     date: new Date(orderState[i]).toDateString(),
+  //     action: (
+  //       <>
+  //         <Link className="fs-3 text-danger" to="/">
+  //           <BiEdit />
+  //         </Link>
+  //         <Link className="ms-3 fs-3 text-danger" to="/">
+  //           <AiFillDelete />
+  //         </Link>
+  //       </>
+  //     ),
+  //   });
+  // }
 
   return (
     <div>
       <h3 className="mb-4 title">View Order</h3>
       <div>
-        <Table columns={columns} dataSource={data1} />
+        {/* <Table columns={columns} dataSource={data1} /> */}
       </div>
     </div>
   );
