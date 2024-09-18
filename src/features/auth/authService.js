@@ -6,12 +6,20 @@ const getTokenfromLocalStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user"))
   : null;
 
+// const configg = {
+//   headers: {
+//     Authorization: getTokenfromLocalStorage ? `Bearer ${getTokenfromLocalStorage.token}`,
+//     Accept: "application/json",
+//   },
+// };
+
 const configg = {
   headers: {
-    Authorization: `Bearer ${getTokenfromLocalStorage.token}`,
-    Accept: "application/json",
+    Authorization: getTokenfromLocalStorage ? `Bearer ${getTokenfromLocalStorage.token}` : "",
+    Accept: "application/json"
   },
 };
+
 
 const login = async (userData) => {
   const response = await axios.post(`${base_url}user/admin-login`, userData);

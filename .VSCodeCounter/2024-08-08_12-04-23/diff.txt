@@ -1,0 +1,89 @@
+Date : 2024-08-08 12:04:23
+Directory : c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel
+Total : 47 files,  2453 codes, 771 comments, 328 blanks, all 3552 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         45 |      2,431 |        771 |        328 |      3,530 |
+| JSON       |          2 |         22 |          0 |          0 |         22 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                  | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                     |         47 |      2,453 |        771 |        328 |      3,552 |
+| . (Files)                                                                                             |          2 |         22 |          0 |          0 |         22 |
+| src                                                                                                   |         45 |      2,431 |        771 |        328 |      3,530 |
+| src (Files)                                                                                           |          1 |         11 |          0 |         -1 |         10 |
+| src\app                                                                                               |          1 |          2 |          0 |          0 |          2 |
+| src\components                                                                                        |          2 |         34 |          0 |          3 |         37 |
+| src\features                                                                                          |         20 |      1,210 |        190 |        103 |      1,503 |
+| src\features\auth                                                                                     |          2 |         40 |         17 |          7 |         64 |
+| src\features\bcategory                                                                                |          2 |        130 |          0 |          7 |        137 |
+| src\features\blogs                                                                                    |          2 |        145 |          0 |          9 |        154 |
+| src\features\brands                                                                                   |          2 |        130 |          0 |          5 |        135 |
+| src\features\color                                                                                    |          2 |        131 |          0 |          5 |        136 |
+| src\features\coupon                                                                                   |          2 |        193 |         77 |         29 |        299 |
+| src\features\enquiry                                                                                  |          2 |        107 |          0 |          7 |        114 |
+| src\features\pcategory                                                                                |          2 |        130 |          0 |          7 |        137 |
+| src\features\product                                                                                  |          2 |        170 |         94 |         23 |        287 |
+| src\features\upload                                                                                   |          2 |         34 |          2 |          4 |         40 |
+| src\pages                                                                                             |         21 |      1,174 |        581 |        223 |      1,978 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                              | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\package-lock.json                          | JSON       |         21 |          0 |          0 |         21 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\package.json                               | JSON       |          1 |          0 |          0 |          1 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\App.js                                 | JavaScript |         11 |          0 |         -1 |         10 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\app\store.js                           | JavaScript |          2 |          0 |          0 |          2 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\components\CustomModal.js              | JavaScript |         18 |          0 |          3 |         21 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\components\MainLayout.js               | JavaScript |         16 |          0 |          0 |         16 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\auth\authService.js           | JavaScript |         10 |         16 |          6 |         32 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\auth\authSlice.js             | JavaScript |         30 |          1 |          1 |         32 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\bcategory\bcategoryService.js | JavaScript |         25 |          0 |          2 |         27 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\bcategory\bcategorySlice.js   | JavaScript |        105 |          0 |          5 |        110 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\blogs\blogService.js          | JavaScript |         30 |          0 |          7 |         37 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\blogs\blogSlice.js            | JavaScript |        115 |          0 |          2 |        117 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\brands\brandService.js        | JavaScript |         25 |          0 |          2 |         27 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\brands\brandSlice.js          | JavaScript |        105 |          0 |          3 |        108 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\color\colorService.js         | JavaScript |         25 |          0 |          3 |         28 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\color\colorSlice.js           | JavaScript |        106 |          0 |          2 |        108 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\coupon\couponService.js       | JavaScript |         40 |          0 |          8 |         48 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\coupon\couponSlice.js         | JavaScript |        153 |         77 |         21 |        251 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\enquiry\enquiryService.js     | JavaScript |         22 |          0 |          3 |         25 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\enquiry\enquirySlice.js       | JavaScript |         85 |          0 |          4 |         89 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\pcategory\pcategoryService.js | JavaScript |         25 |          0 |          3 |         28 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\pcategory\pcategorySlice.js   | JavaScript |        105 |          0 |          4 |        109 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\product\productService.js     | JavaScript |         56 |         22 |          8 |         86 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\product\productSlice.js       | JavaScript |        114 |         72 |         15 |        201 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\upload\uploadService.js       | JavaScript |          5 |          0 |          3 |          8 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\features\upload\uploadSlice.js         | JavaScript |         29 |          2 |          1 |         32 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\AddCoupon.js                     | JavaScript |        137 |        136 |         27 |        300 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Addblog.js                       | JavaScript |        141 |         16 |         21 |        178 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Addblogcat.js                    | JavaScript |         72 |          2 |         18 |         92 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Addbrand.js                      | JavaScript |         82 |         12 |          9 |        103 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Addcategory.js                   | JavaScript |         75 |          7 |         12 |         94 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Addcolor.js                      | JavaScript |         70 |          6 |          9 |         85 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Addproduct.js                    | JavaScript |        163 |        374 |         50 |        587 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Blogcatlist.js                   | JavaScript |         24 |          0 |          9 |         33 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Bloglist.js                      | JavaScript |         28 |          0 |          8 |         36 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Brandlist.js                     | JavaScript |         34 |          1 |          4 |         39 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Categorylist.js                  | JavaScript |         33 |          0 |          5 |         38 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Colorlist.js                     | JavaScript |         31 |          0 |          6 |         37 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Couponlist.js                    | JavaScript |         89 |          0 |         14 |        103 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Enquiries.js                     | JavaScript |         56 |          0 |          8 |         64 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Forgotpassword.js                | JavaScript |        -23 |          0 |         -2 |        -25 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Login.js                         | JavaScript |         -5 |          0 |          0 |         -5 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Orders.js                        | JavaScript |         -6 |          1 |          0 |         -5 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Productlist.js                   | JavaScript |         24 |          1 |          9 |         34 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\Resetpassword.js                 | JavaScript |        -24 |          0 |         -2 |        -26 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\ViewEnq.js                       | JavaScript |         92 |          0 |         10 |        102 |
+| c:\Users\Vikash\Desktop\Edugyan\2 ongoing\BME\admin pannel\src\pages\ViewOrder.js                     | JavaScript |         81 |         25 |          8 |        114 |
+| Total                                                                                                 |            |      2,453 |        771 |        328 |      3,552 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
